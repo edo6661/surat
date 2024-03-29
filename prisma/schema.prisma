@@ -17,16 +17,42 @@ model User {
   id    String @id @default(uuid())
   username  String
   externalUserId String @unique
-  role Role @default(USER)
+  role Role @default(APPLICANT)
   profilePhoto String 
+
+  Letter Letter[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
+model Letter {
+  id    String @id @default(uuid())
+  title String
+  date DateTime
+  approved Boolean @default(false)
 
+
+  user User @relation(fields: [userId], references: [id])
+  userId String
+  content Content[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Content {
+  id    String @id @default(uuid())
+  name String
+  description String
+  letterId String
+  letter Letter @relation(fields: [letterId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
 
 enum Role {
-  USER
-  ADMIN
+  APPLICANT
+  STAFF
+  SUBDISTRICT
 }

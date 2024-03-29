@@ -2,7 +2,9 @@ import puppeteer from "puppeteer";
 import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest, res: NextResponse) => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    executablePath: "C:\\Users\\muham\\AppData\\Local\\chrome-win\\chrome.exe",
+  });
   const page = await browser.newPage();
 
   await page.goto("http://localhost:3000", { waitUntil: "networkidle0" });

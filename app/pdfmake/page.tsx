@@ -1,15 +1,13 @@
 "use client";
 import { Heading } from "@/components/custom-ui/heading";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import axios from "axios";
-import FileSaver from "file-saver";
-import { jsPDF } from "jspdf";
+import Image from "next/image";
 import Link from "next/link";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export default function Home() {
-  const doc = new jsPDF();
-
   const actualData = [
     {
       title: "Surat Kematian",
@@ -22,30 +20,43 @@ export default function Home() {
   ];
 
   const onClick = () => {
-    actualData.forEach((data, i) => {
-      const pageWidth = doc.internal.pageSize.getWidth();
-      const fontSize = 16;
-      const titleWidth =
-        (doc.getStringUnitWidth(data.title) * fontSize) /
-        doc.internal.scaleFactor;
-
-      const titleX = (pageWidth - titleWidth) / 2;
-
-      doc.text(data.title, titleX, 10);
-
-      doc.text(`Nama: ${data.nama}`, 10, 20);
-      doc.text(`Tanggal Lahir: ${data.tanggalLahir}`, 10, 30);
-      doc.text(`Tanggal Kematian: ${data.tanggalKematian}`, 10, 40);
-      doc.text(`Tempat Kematian: ${data.tempatKematian}`, 10, 50);
-      doc.text(`Penyebab Kematian: ${data.penyebabKematian}`, 10, 60);
+    actualData.forEach((data) => {
+      const docDefinition = {
+        content: [
+          { text: data.title, fontSize: 16, bold: true, margin: [0, 0, 0, 8] },
+          { text: `Nama: ${data.nama}`, fontSize: 14, margin: [0, 0, 0, 5] },
+          {
+            text: `Tanggal Lahir: ${data.tanggalLahir}`,
+            fontSize: 14,
+            margin: [0, 0, 0, 5],
+          },
+          {
+            text: `Tanggal Kematian: ${data.tanggalKematian}`,
+            fontSize: 14,
+            margin: [0, 0, 0, 5],
+          },
+          {
+            text: `Tempat Kematian: ${data.tempatKematian}`,
+            fontSize: 14,
+            margin: [0, 0, 0, 5],
+          },
+          {
+            text: `Penyebab Kematian: ${data.penyebabKematian}`,
+            fontSize: 14,
+            margin: [0, 0, 0, 5],
+          },
+        ],
+      };
+      pdfMake
+        // @ts-ignore
+        .createPdf(docDefinition)
+        .download(`${data.nama}_SuratKematian.pdf`);
     });
-
-    doc.save("a4.pdf");
   };
 
   return (
     <>
-      <Link href="/pdfmake">pdfmake</Link>
+      <Link href="/">Home</Link>
       <div className="container pt-2 pb-4 bg-neutral-200/20">
         {actualData.map((data) => {
           return (

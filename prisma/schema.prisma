@@ -20,55 +20,11 @@ model User {
   role Role @default(USER)
   profilePhoto String 
 
-  borrowedItems Borrow[]
-  history History[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model Good {
-  id    String @id @default(uuid())
-  name  String
-  qty Int
-}
 
-model Borrow {
-  id    String @id @default(uuid())
-  approved Boolean @default(false)
-  reason String?
-  userId String
-  user User @relation(fields: [userId], references: [id])
-  item Item[]
-  isRetured Boolean @default(false)
-  returned Return[]
-}
-
-model Item {
-  id    String @id @default(uuid())
-  name  String
-  qty Int
-  borrowId String
-  borrow Borrow @relation(fields: [borrowId], references: [id])
-}
-
-model Return {
-  id    String @id @default(uuid())
-  returned Boolean @default(false)
-  reason String?
-  borrowId String
-  borrow Borrow @relation(fields: [borrowId], references: [id])
-  History History[]
-}
-
-model History {
-  id    String @id @default(uuid())
-  userId String
-  user User @relation(fields: [userId], references: [id])
-  borrowId String
-  returnId String
-  return Return @relation(fields: [returnId], references: [id])
-
-}
 
 enum Role {
   USER

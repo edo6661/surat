@@ -7,7 +7,7 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-export default function Home() {
+export default function PdfMake() {
   const actualData = [
     {
       title: "Surat Kematian",

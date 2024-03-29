@@ -6,6 +6,7 @@ export default authMiddleware({
     "/",
     "/api/webhooks/clerk(.*)",
     "/api/uploadthing",
+    "/pdmake",
   ],
 });
 

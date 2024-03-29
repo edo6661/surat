@@ -1,8 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
   provider = "prisma-client-js"
@@ -28,27 +24,252 @@ model User {
 
 model Letter {
   id    String @id @default(uuid())
-  title String
-  date DateTime
   approved Boolean @default(false)
 
 
-  user User @relation(fields: [userId], references: [id])
   userId String
-  content Content[]
+
+  domisiliUsahaId String?
+  tinggalPendudukId String?
+  kelahiranId String?
+  kematianId String?
+  tidakMampuSekolahId String?
+  pengantarSKCKId String?
+  keteranganUsahaId String?
+  tidakMampuId String?
+  keteranganSuamiIstriId String?
+  keteranganBelumMenikahId String?
+
+  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  domisiliUsaha  DomisiliUsaha? @relation(fields: [domisiliUsahaId], references: [id], onDelete: Cascade)
+  tinggalPenduduk TinggalPenduduk? @relation(fields: [tinggalPendudukId], references: [id], onDelete: Cascade)
+  kelahiran Kelahiran? @relation(fields: [kelahiranId], references: [id], onDelete: Cascade)
+  kematian Kematian? @relation(fields: [kematianId], references: [id], onDelete: Cascade)
+  tidakMampuSekolah TidakMampuSekolah? @relation(fields: [tidakMampuSekolahId], references: [id], onDelete: Cascade)
+  pengantarSKCK PengantarSKCK? @relation(fields: [pengantarSKCKId], references: [id], onDelete: Cascade)
+  keteranganUsaha KeteranganUsaha? @relation(fields: [keteranganUsahaId], references: [id], onDelete: Cascade)
+  tidakMampu TidakMampu? @relation(fields: [tidakMampuId], references: [id], onDelete: Cascade)
+  keteranganSuamiIstri KeteranganSuamiIstri? @relation(fields: [keteranganSuamiIstriId], references: [id], onDelete: Cascade)
+  keteranganBelumMenikah KeteranganBelumMenikah? @relation(fields: [keteranganBelumMenikahId], references: [id], onDelete: Cascade)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-model Content {
-  id    String @id @default(uuid())
-  name String
-  description String
-  letterId String
-  letter Letter @relation(fields: [letterId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
+
+model DomisiliUsaha {
+  id           String     @id @default(uuid())
+  pemilikUsaha String
+  alamatUsaha  String
+  jenisUsaha   String
+  namaUsaha   String
+  nik String
+  fotoKtp String
+  fotoUsaha String
+
+  letters      Letter[]
+
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model TinggalPenduduk {
+  id          String    @id @default(uuid())
+  nama        String
+  nik String
+  tempatLahir String
+  tanggalLahir DateTime
+  alamatAsal String
+  alamatSekarang String
+  fotoKtp String
+  fotoKk String
+
+  letters      Letter[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Kelahiran {
+  id           String    @id @default(uuid())
+  jenisKelamin String
+  tanggalLahir DateTime
+  tempatLahir  String
+  agama       String
+  namaAyah    String
+  tempatLahirAyah String
+  tanggalLahirAyah DateTime
+  agamaAyah   String
+  pekerjaanAyah String
+  namaIbu     String
+  tempatLahirIbu String
+  tanggalLahirIbu DateTime
+  agamaIbu    String
+  pekerjaanIbu String
+  letters      Letter[]
+  fotoKtpAyah String
+  fotoKtpIbu String
+  fotoKk String
+  
+
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Kematian {
+  id           String    @id @default(uuid())
+  nama         String
+  nik String
+  tanggalLahir DateTime
+  tanggalKematian DateTime
+  tempatLahir  String
+  jenisKelamin String
+  alamat       String
+  agama        String
+  pekerjaan    String
+  alamatKematian String
+  tempatKematian String
+  letters      Letter[]
+  fotoKtp String
+  fotoKk String
+
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model TidakMampuSekolah {
+  id            String     @id @default(uuid())
+  nama          String
+  tempatLahir   String
+  tanggalLahir  DateTime
+  jenisKelamin  String
+  agama         String
+  alamat        String
+  alasanTidakMampu String 
+
+  namaAyah      String
+  nikAyah String
+  tempatLahirAyah String
+  tanggalLahirAyah DateTime
+  agamaAyah     String
+  pekerjaanAyah String
+  fotoKtpAyah String
+  fotoRumah String
+
+  letters      Letter[]
+
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model PengantarSKCK {
+  id          String    @id @default(uuid())
+  nama        String
+  nik         String  
+  jenisKelamin String
+  tempatLahir String
+  tanggalLahir DateTime
+  alamat      String
+  pekerjaan   String
+  keperluan   String
+  fotoKtp String
+
+  letters      Letter[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model KeteranganUsaha {
+  id           String    @id @default(uuid())
+  nama         String
+  nik          String 
+  tempatLahir  String
+  tanggalLahir DateTime
+  agama        String
+  pekerjaan    String 
+  alamat       String
+  fotoUsaha   String
+  namaUsaha    String
+  jenisUsaha   String
+  lokasiUsaha  String
+    letters      Letter[]
+
+
+  fotoKtp String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model TidakMampu {
+  id           String    @id @default(uuid())
+  nama         String
+  nik          String 
+  jenisKelamin String
+  tempatLahir  String
+  tanggalLahir DateTime 
+  agama        String
+  alasanTidakMampu String
+  pendapatan   Int
+  alamat       String
+  pekerjaan    String
+  fotoKtp String
+  fotoRumah String
+  keperluan    String
+
+  letters      Letter[]
+
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model KeteranganSuamiIstri {
+  id           String    @id @default(uuid())
+  namaSuami    String 
+  nikSuami     String
+  tempatLahirSuami String
+  tanggalLahirSuami DateTime
+  agamaSuami   String
+  alamatSuami  String
+  pekerjaanSuami String
+
+  namaIstri    String
+  nikIstri     String
+  tempatPernikahan String
+  tanggalPernikahan DateTime
+  agamaIstri   String
+  alamatIstri  String
+  pekerjaanIstri String
+
+  fotoKtpSuami String
+  fotoKtpIstri String
+  fotoBukuNikah String
+
+  letters      Letter[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model KeteranganBelumMenikah {
+  id           String    @id @default(uuid())
+  nama         String
+  tempatLahir  String
+  tanggalLahir DateTime
+  agama        String
+  alamat       String
+  pekerjaan    String
+  nik          String
+  fotoKtp String
+  fotoKk String
+  fotoAktaKelahiran String
+
+  letters      Letter[]
+
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
 }
 
 enum Role {

@@ -3,6 +3,7 @@ import { ChildrenType } from "@/types";
 import { ClerkProvider } from "@clerk/nextjs";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
+import { Toaster } from "@/components/ui/sonner";
 
 const Providers = ({ children }: ChildrenType) => {
   return (
@@ -16,6 +17,7 @@ const Providers = ({ children }: ChildrenType) => {
          */
         routerConfig={extractRouterConfig(ourFileRouter)}
       />
+      <Toaster />
       {children}
     </ClerkProvider>
   );

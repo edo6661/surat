@@ -23,7 +23,13 @@ export default function PdfMake() {
     actualData.forEach((data) => {
       const docDefinition = {
         content: [
-          { text: data.title, fontSize: 16, bold: true, margin: [0, 0, 0, 8] },
+          {
+            text: "KEPALA LINGKUNGAN SIDANGKAL V KEL.",
+            fontSize: 16,
+            bold: true,
+            margin: [0, 0, 0, 8],
+            alignment: "center",
+          },
           { text: `Nama: ${data.nama}`, fontSize: 14, margin: [0, 0, 0, 5] },
           {
             text: `Tanggal Lahir: ${data.tanggalLahir}`,

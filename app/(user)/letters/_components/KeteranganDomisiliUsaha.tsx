@@ -1,18 +1,21 @@
 import { deleteLetterWithId } from '@/actions/letter';
 import AlertDialog from '@/components/custom-ui/AlertDialog';
+import { Button } from '@/components/ui/button';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { formatDate } from '@/utils/formateDate';
 import { DomisiliUsaha, Letter, User } from '@prisma/client'
 import Image from 'next/image';
 import React, { useTransition } from 'react'
 import { toast } from 'sonner';
+import ToggleApproveItem from './ToggleApproveItem';
+import { useRouter } from 'next/navigation';
 interface DomisiliUsahaProps extends Letter {
   domisiliUsaha: DomisiliUsaha;
   user: User;
   currentUser: User;
 }
 const KeteranganDomisiliUsaha = (
-  { domisiliUsaha, user, currentUser, id }: DomisiliUsahaProps
+  { domisiliUsaha, user, currentUser, id, approved }: DomisiliUsahaProps
 ) => {
   const [isPending, startTransition] = useTransition();
   const handleDelete = async () => {
@@ -28,11 +31,15 @@ const KeteranganDomisiliUsaha = (
     });
   };
 
+  const router = useRouter();
 
-
+  const redirectToLetter = () => router.push(`/letter/${id}`)
 
   return (
-    <TableRow>
+    <TableRow
+      onClick={redirectToLetter}
+      className='cursor-pointer'
+    >
       {currentUser.role === "APPLICANT" ? null :
         <TableCell>
           {user.username}
@@ -75,15 +82,21 @@ const KeteranganDomisiliUsaha = (
         {formatDate(domisiliUsaha.createdAt)}
       </TableCell>
       {currentUser.role !== "APPLICANT" && (
-        <TableCell>
-          <AlertDialog
-            action={handleDelete}
-            isPending={isPending}
-            trigger={
-              isPending ? "Deleting..." : "Delete"
-            }
+        <>
+          <ToggleApproveItem
+            id={id}
+            approved={approved}
           />
-        </TableCell>
+          <TableCell>
+            <AlertDialog
+              action={handleDelete}
+              isPending={isPending}
+              trigger={
+                isPending ? "Deleting..." : "Delete"
+              }
+            />
+          </TableCell>
+        </>
       )}
     </TableRow>
   )

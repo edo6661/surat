@@ -77,7 +77,7 @@
 
 @layer utilities {
   .base-container {
-    @apply container py-8;
+    @apply px-4 py-2;
   }
   .fl-ic {
     @apply flex items-center;

@@ -6,6 +6,7 @@ import { Kelahiran, Letter, User } from '@prisma/client';
 import Image from 'next/image';
 import React, { useTransition } from 'react';
 import { toast } from 'sonner';
+import ToggleApproveItem from './ToggleApproveItem';
 
 interface KelahiranProps extends Letter {
   kelahiran: Kelahiran;
@@ -13,7 +14,7 @@ interface KelahiranProps extends Letter {
   currentUser: User;
 }
 
-const KeteranganKelahiran = ({ kelahiran, user, currentUser, id }: KelahiranProps) => {
+const KeteranganKelahiran = ({ kelahiran, user, currentUser, id, approved }: KelahiranProps) => {
 
   const [isPending, startTransition] = useTransition();
   const handleDelete = async () => {
@@ -79,15 +80,21 @@ const KeteranganKelahiran = ({ kelahiran, user, currentUser, id }: KelahiranProp
       <TableCell>{formatDate(kelahiran.createdAt)}</TableCell>
       {
         currentUser.role !== "APPLICANT" && (
-          <TableCell>
-            <AlertDialog
-              action={handleDelete}
-              isPending={isPending}
-              trigger={
-                isPending ? "Deleting..." : "Delete"
-              }
+          <>
+            <ToggleApproveItem
+              id={id}
+              approved={approved}
             />
-          </TableCell>
+            <TableCell>
+              <AlertDialog
+                action={handleDelete}
+                isPending={isPending}
+                trigger={
+                  isPending ? "Deleting..." : "Delete"
+                }
+              />
+            </TableCell>
+          </>
         )
       }
     </TableRow>

@@ -6,6 +6,7 @@ import { Kematian, Letter, User } from '@prisma/client';
 import Image from 'next/image';
 import React, { useTransition } from 'react';
 import { toast } from 'sonner';
+import ToggleApproveItem from './ToggleApproveItem';
 
 interface KematianProps extends Letter {
   kematian: Kematian;
@@ -13,7 +14,7 @@ interface KematianProps extends Letter {
   currentUser: User;
 }
 
-const KeteranganKematian = ({ kematian, user, id, currentUser }: KematianProps) => {
+const KeteranganKematian = ({ kematian, user, id, currentUser, approved }: KematianProps) => {
 
   const [isPending, startTransition] = useTransition();
   const handleDelete = async () => {
@@ -68,15 +69,21 @@ const KeteranganKematian = ({ kematian, user, id, currentUser }: KematianProps) 
       <TableCell>{formatDate(kematian.createdAt)}</TableCell>
       {
         currentUser.role !== "APPLICANT" && (
-          <TableCell>
-            <AlertDialog
-              action={handleDelete}
-              isPending={isPending}
-              trigger={
-                isPending ? "Deleting..." : "Delete"
-              }
+          <>
+            <ToggleApproveItem
+              id={id}
+              approved={approved}
             />
-          </TableCell>
+            <TableCell>
+              <AlertDialog
+                action={handleDelete}
+                isPending={isPending}
+                trigger={
+                  isPending ? "Deleting..." : "Delete"
+                }
+              />
+            </TableCell>
+          </>
         )
       }
     </TableRow>

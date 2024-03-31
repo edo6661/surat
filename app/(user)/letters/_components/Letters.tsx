@@ -161,11 +161,10 @@ const Letters = (
               </TableRow>
             </TableHeader>
             <TableBody>
-              {letters.length > 0 ? letters?.map((letter: any) => {
+              {letters.length > 0 ? letters?.map((letter) => {
                 return selectedItem === "Domisili Usaha" ? (
                   <FormDomisiliUsaha key={letter.id} {...letter} domisiliUsaha={letter.domisiliUsaha!}
                     currentUser={currentUser}
-
                   />
                 ) : selectedItem === "Belum Menikah" ? (
                   <KeteranganBelumMenikah key={letter.id} {...letter} keteranganBelumMenikah={letter?.keteranganBelumMenikah!}

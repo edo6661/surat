@@ -21,6 +21,7 @@ export const formulirList = [
   "Tidak Mampu (Umum)",
   "Suami Istri",
   "Belum Menikah",
+  "Approved",
   "Action",
 ];
 
@@ -34,6 +35,7 @@ export const tableHeadDomisiliUsaha = [
   "Foto KTP",
   "Foto",
   "Dibuat",
+  "Approved",
   "Action",
 ];
 
@@ -48,6 +50,7 @@ export const tableHeadTinggalPenduduk = [
   "Foto KTP",
   "Foto KK",
   "Dibuat",
+  "Approved",
   "Action",
 ];
 
@@ -71,6 +74,7 @@ export const tableHeadKelahiran = [
   "Foto KTP Ibu",
   "Foto KK",
   "Dibuat",
+  "Approved",
   "Action",
 ];
 
@@ -90,6 +94,7 @@ export const tableHeadKematian = [
   "Foto KTP",
   "Foto KK",
   "Dibuat",
+  "Approved",
   "Action",
 ];
 
@@ -111,6 +116,7 @@ export const tableHeadTidakMampuSekolah = [
   "Foto KTP Ayah",
   "Foto Rumah",
   "Dibuat",
+  "Approved",
   "Action",
 ];
 
@@ -126,6 +132,7 @@ export const tableHeadPengantarSKCK = [
   "Keperluan",
   "Foto KTP",
   "Dibuat",
+  "Approved",
   "Action",
 ];
 
@@ -144,6 +151,7 @@ export const tableHeadKeteranganUsaha = [
   "Lokasi Usaha",
   "Foto KTP",
   "Dibuat",
+  "Approved",
   "Action",
 ];
 
@@ -163,6 +171,7 @@ export const tableHeadTidakMampu = [
   "Foto Rumah",
   "Keperluan",
   "Dibuat",
+  "Approved",
   "Action",
 ];
 
@@ -186,6 +195,7 @@ export const tableHeadKeteranganSuamiIstri = [
   "Foto KTP Istri",
   "Foto Buku Nikah",
   "Dibuat",
+  "Approved",
   "Action",
 ];
 
@@ -202,5 +212,6 @@ export const tableHeadKeteranganBelumMenikah = [
   "Foto KK",
   "Foto Akta Kelahiran",
   "Dibuat",
+  "Approved",
   "Action",
 ];

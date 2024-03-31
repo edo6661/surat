@@ -5,6 +5,8 @@ import { Button } from "../ui/button";
 import { getCurrentUser } from "@/services/user";
 
 const Header = async () => {
+  const user = await getCurrentUser();
+
   return (
     <>
       <header>
@@ -14,9 +16,9 @@ const Header = async () => {
             <Link href="/pdfmake">pdfmake</Link>
             <div className="fl-ic gap-4">
               <SignedIn>
-                <div className="fl-ic gap-4">
+                {user?.role === "APPLICANT" && (
                   <Link href="/create-letter">Create Letter</Link>
-                </div>
+                )}
                 {/* {user?.role === "STAFF" && ( */}
                 <Link href="/letters">Letters</Link>
                 {/* )} */}

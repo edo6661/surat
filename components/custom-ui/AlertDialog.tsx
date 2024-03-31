@@ -23,7 +23,7 @@ const AlertDialog = (
   return (
     <Alert>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive">{trigger}</Button>
+        <Button variant="destructive" size="sm">{trigger}</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

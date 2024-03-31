@@ -30,7 +30,7 @@ import TidakMampu from "./KeteranganTidakMampu"
 import KeteranganUsaha from "./KeteranganUsaha"
 import KeteranganSuamiIstri from "./KeteranganSuamiIstri"
 import { User } from "@prisma/client"
-import { Heading } from "lucide-react"
+import { Heading } from "@/components/custom-ui/heading"
 
 interface LettersProps {
   lettersDomisiliUsaha: LetterAllRelation[]
@@ -126,7 +126,7 @@ const Letters = (
     "Usaha": userLettersUsaha,
   }
 
-  const letters = currentUser.role === "APPLICANT" ? userLettersMap[selectedItem!] : lettersMap[selectedItem!] || []
+  const letters = currentUser.role === "APPLICANT" ? userLettersMap[selectedItem!] || [] : lettersMap[selectedItem!] || []
 
   return (
     <section className='base-container'>
@@ -137,7 +137,6 @@ const Letters = (
         </CardHeader>
         <CardContent className="space-y-4">
           <SelectCategory handleSelect={handleSelect} />
-          {/* ! domisili usaha */}
           <Table>
             <TableCaption>A list of your recent Letters.</TableCaption>
             <TableHeader>
@@ -203,9 +202,7 @@ const Letters = (
 
                   />
                 ) : null
-              }) : <Heading>
-                Empty Data
-              </Heading>}
+              }) : null}
             </TableBody>
           </Table>
         </CardContent>

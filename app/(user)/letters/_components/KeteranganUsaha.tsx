@@ -10,7 +10,7 @@ interface KeteranganUsahaProps extends Letter {
   currentUser: User;
 }
 
-const KeteranganUsaha = ({ keteranganUsaha, user, currentUser }: KeteranganUsahaProps) => {
+const Usaha = ({ keteranganUsaha, user, currentUser }: KeteranganUsahaProps) => {
   return (
     <TableRow>
       {currentUser.role === "APPLICANT" ? null :
@@ -52,4 +52,4 @@ const KeteranganUsaha = ({ keteranganUsaha, user, currentUser }: KeteranganUsaha
   );
 };
 
-export default KeteranganUsaha;
+export default Usaha;

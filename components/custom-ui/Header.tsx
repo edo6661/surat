@@ -5,7 +5,6 @@ import { Button } from "../ui/button";
 import { getCurrentUser } from "@/services/user";
 
 const Header = async () => {
-  const user = await getCurrentUser()
   return (
     <>
       <header>

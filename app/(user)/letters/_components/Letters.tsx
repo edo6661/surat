@@ -43,16 +43,16 @@ interface LettersProps {
   lettersTidakMampu: LetterAllRelation[]
   lettersSuamiIstri: LetterAllRelation[]
   lettersBelumMenikah: LetterAllRelation[]
-  userLettersDomisiliUsaha: LetterAllRelation[]
-  userLettersTinggalPenduduk: LetterAllRelation[]
-  userLettersKelahiran: LetterAllRelation[]
-  userLettersKematian: LetterAllRelation[]
-  userLettersTidakMampuSekolah: LetterAllRelation[]
-  userLettersSkck: LetterAllRelation[]
-  userLettersUsaha: LetterAllRelation[]
-  userLettersTidakMampu: LetterAllRelation[]
-  userLettersSuamiIstri: LetterAllRelation[]
-  userLettersBelumMenikah: LetterAllRelation[]
+  // userLettersDomisiliUsaha: LetterAllRelation[]
+  // userLettersTinggalPenduduk: LetterAllRelation[]
+  // userLettersKelahiran: LetterAllRelation[]
+  // userLettersKematian: LetterAllRelation[]
+  // userLettersTidakMampuSekolah: LetterAllRelation[]
+  // userLettersSkck: LetterAllRelation[]
+  // userLettersUsaha: LetterAllRelation[]
+  // userLettersTidakMampu: LetterAllRelation[]
+  // userLettersSuamiIstri: LetterAllRelation[]
+  // userLettersBelumMenikah: LetterAllRelation[]
   currentUser: User
 }
 
@@ -68,16 +68,16 @@ const Letters = (
     lettersTidakMampu,
     lettersSuamiIstri,
     lettersBelumMenikah,
-    userLettersDomisiliUsaha,
-    userLettersTinggalPenduduk,
-    userLettersKelahiran,
-    userLettersKematian,
-    userLettersTidakMampuSekolah,
-    userLettersSkck,
-    userLettersUsaha,
-    userLettersTidakMampu,
-    userLettersSuamiIstri,
-    userLettersBelumMenikah,
+    // userLettersDomisiliUsaha,
+    // userLettersTinggalPenduduk,
+    // userLettersKelahiran,
+    // userLettersKematian,
+    // userLettersTidakMampuSekolah,
+    // userLettersSkck,
+    // userLettersUsaha,
+    // userLettersTidakMampu,
+    // userLettersSuamiIstri,
+    // userLettersBelumMenikah,
     currentUser
   }: LettersProps
 ) => {
@@ -113,20 +113,21 @@ const Letters = (
     "Tidak Mampu (Umum)": lettersTidakMampu,
     "Usaha": lettersUsaha,
   }
-  const userLettersMap = {
-    "Domisili Usaha": userLettersDomisiliUsaha,
-    "Tinggal Penduduk": userLettersTinggalPenduduk,
-    "Belum Menikah": userLettersBelumMenikah,
-    "Kelahiran": userLettersKelahiran,
-    "Kematian": userLettersKematian,
-    "Pengantar SKCK": userLettersSkck,
-    "Suami Istri": userLettersSuamiIstri,
-    "Tidak Mampu (Sekolah)": userLettersTidakMampuSekolah,
-    "Tidak Mampu (Umum)": userLettersTidakMampu,
-    "Usaha": userLettersUsaha,
-  }
+  // const userLettersMap = {
+  //   "Domisili Usaha": userLettersDomisiliUsaha,
+  //   "Tinggal Penduduk": userLettersTinggalPenduduk,
+  //   "Belum Menikah": userLettersBelumMenikah,
+  //   "Kelahiran": userLettersKelahiran,
+  //   "Kematian": userLettersKematian,
+  //   "Pengantar SKCK": userLettersSkck,
+  //   "Suami Istri": userLettersSuamiIstri,
+  //   "Tidak Mampu (Sekolah)": userLettersTidakMampuSekolah,
+  //   "Tidak Mampu (Umum)": userLettersTidakMampu,
+  //   "Usaha": userLettersUsaha,
+  // }
 
-  const letters = currentUser.role === "APPLICANT" ? userLettersMap[selectedItem!] || [] : lettersMap[selectedItem!] || []
+  // const letters = currentUser.role === "APPLICANT" ? userLettersMap[selectedItem!] || [] : lettersMap[selectedItem!] || []
+  const letters = lettersMap[selectedItem!] || []
 
   return (
     <section className='base-container'>

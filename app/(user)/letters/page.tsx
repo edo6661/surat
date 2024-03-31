@@ -17,16 +17,16 @@ const LetterPage = async () => {
   const lettersTidakMampu = await getAllLettersTidakMampu()
   const lettersSuamiIstri = await getAllLettersKeteranganSuamiIstri()
   const lettersBelumMenikah = await getAllLettersKeteranganBelumMenikah()
-  const userLettersDomisiliUsaha = await getUserLettersDomisiUsaha()
-  const userLettersTinggalPenduduk = await getUserLettersTinggalPenduduk()
-  const userLettersKelahiran = await getUserLettersKelahiran()
-  const userLettersKematian = await getUserLettersKematian()
-  const userLettersTidakMampuSekolah = await getUserLettersTidakMampuSekolah()
-  const userLettersSkck = await getUserLettersPengantarSKCK()
-  const userLettersUsaha = await getUserLettersKeteranganUsaha()
-  const userLettersTidakMampu = await getUserLettersTidakMampu()
-  const userLettersSuamiIstri = await getUserLettersKeteranganSuamiIstri()
-  const userLettersBelumMenikah = await getUserLettersKeteranganBelumMenikah()
+  // const userLettersDomisiliUsaha = await getUserLettersDomisiUsaha()
+  // const userLettersTinggalPenduduk = await getUserLettersTinggalPenduduk()
+  // const userLettersKelahiran = await getUserLettersKelahiran()
+  // const userLettersKematian = await getUserLettersKematian()
+  // const userLettersTidakMampuSekolah = await getUserLettersTidakMampuSekolah()
+  // const userLettersSkck = await getUserLettersPengantarSKCK()
+  // const userLettersUsaha = await getUserLettersKeteranganUsaha()
+  // const userLettersTidakMampu = await getUserLettersTidakMampu()
+  // const userLettersSuamiIstri = await getUserLettersKeteranganSuamiIstri()
+  // const userLettersBelumMenikah = await getUserLettersKeteranganBelumMenikah()
 
   const currentUser = await getCurrentUser()
 
@@ -42,16 +42,16 @@ const LetterPage = async () => {
     lettersTidakMampu={lettersTidakMampu!}
     lettersSuamiIstri={lettersSuamiIstri!}
     lettersBelumMenikah={lettersBelumMenikah!}
-    userLettersDomisiliUsaha={userLettersDomisiliUsaha!}
-    userLettersTinggalPenduduk={userLettersTinggalPenduduk!}
-    userLettersKelahiran={userLettersKelahiran!}
-    userLettersKematian={userLettersKematian!}
-    userLettersTidakMampuSekolah={userLettersTidakMampuSekolah!}
-    userLettersSkck={userLettersSkck!}
-    userLettersUsaha={userLettersUsaha!}
-    userLettersTidakMampu={userLettersTidakMampu!}
-    userLettersSuamiIstri={userLettersSuamiIstri!}
-    userLettersBelumMenikah={userLettersBelumMenikah!}
+    // userLettersDomisiliUsaha={userLettersDomisiliUsaha!}
+    // userLettersTinggalPenduduk={userLettersTinggalPenduduk!}
+    // userLettersKelahiran={userLettersKelahiran!}
+    // userLettersKematian={userLettersKematian!}
+    // userLettersTidakMampuSekolah={userLettersTidakMampuSekolah!}
+    // userLettersSkck={userLettersSkck!}
+    // userLettersUsaha={userLettersUsaha!}
+    // userLettersTidakMampu={userLettersTidakMampu!}
+    // userLettersSuamiIstri={userLettersSuamiIstri!}
+    // userLettersBelumMenikah={userLettersBelumMenikah!}
     currentUser={currentUser!}
   />
 }

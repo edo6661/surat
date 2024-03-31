@@ -1,28 +1,29 @@
 "use server";
 import { domisiliUsaha } from "@/app/(user)/create-letter/_components/FormDomisiliUsaha";
+import { tidakMampuSekolahSchema } from "@/app/(user)/create-letter/_components/FormTidakMampuSekolah";
 import { db } from "@/lib/db";
 import { getCurrentUser } from "@/services/user";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
-export const createDomisiliUsaha = async (
-  data: z.infer<typeof domisiliUsaha>
+export const createTidakMampuSekolah = async (
+  data: z.infer<typeof tidakMampuSekolahSchema>
 ) => {
   try {
     const currentUser = await getCurrentUser();
-    const newDomisiliUsaha = await db.domisiliUsaha.create({
+    const newTidakMampuSekolah = await db.tidakMampuSekolah.create({
       data: {
         ...data,
       },
     });
     await db.letter.create({
       data: {
-        domisiliUsahaId: newDomisiliUsaha.id,
+        tidakMampuSekolahId: newTidakMampuSekolah.id,
         userId: currentUser?.id!,
       },
     });
     revalidatePath("/letters");
-    return newDomisiliUsaha;
+    return newTidakMampuSekolah;
   } catch (err) {
     console.log(err);
   }

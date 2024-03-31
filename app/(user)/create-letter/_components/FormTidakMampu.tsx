@@ -7,55 +7,70 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import FormInput from "@/components/custom-ui/FormInput";
-import { defaultValueDomisiliUsaha, keyDomisiliUsaha } from "@/constants/forms";
+import { defaultValueTidakMampu, keyTidakMampu } from "@/constants/forms";
+import { createTidakMampu } from "@/actions/tidakMampu";
 import { motion } from "framer-motion";
 import UploadImage from "@/components/custom-ui/UploadImage";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import { X } from "lucide-react";
 import { useTransition } from "react";
-import { createDomisiliUsaha } from "@/actions/domisiliUsaha";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import FormDate from "@/components/custom-ui/FormDate";
 
-export const domisiliUsaha = z.object({
-  pemilikUsaha: z.string().min(2, {
-    message: "Pemilik Usaha must be at least 2 characters.",
-  }),
-  alamatUsaha: z.string().min(2, {
-    message: "Alamat Usaha must be at least 2 characters.",
-  }),
-  jenisUsaha: z.string().min(2, {
-    message: "Jenis Usaha must be at least 2 characters.",
-  }),
-  namaUsaha: z.string().min(2, {
-    message: "Nama Usaha must be at least 2 characters.",
+export const tidakMampuSchema = z.object({
+  nama: z.string().min(2, {
+    message: "Nama must be at least 2 characters.",
   }),
   nik: z.string().min(2, {
     message: "NIK must be at least 2 characters.",
   }),
+  jenisKelamin: z.string().min(2, {
+    message: "Jenis Kelamin must be at least 2 characters.",
+  }),
+  tempatLahir: z.string().min(2, {
+    message: "Tempat Lahir must be at least 2 characters.",
+  }),
+  tanggalLahir: z.date(),
+  agama: z.string().min(2, {
+    message: "Agama must be at least 2 characters.",
+  }),
+  alasanTidakMampu: z.string().min(2, {
+    message: "Alasan Tidak Mampu must be at least 2 characters.",
+  }),
+  pendapatan: z.string(),
+  alamat: z.string().min(2, {
+    message: "Alamat must be at least 2 characters.",
+  }),
+  pekerjaan: z.string().min(2, {
+    message: "Pekerjaan must be at least 2 characters.",
+  }),
   fotoKtp: z.string().min(2, {
     message: "Foto KTP must be at least 2 characters.",
   }),
-  fotoUsaha: z.string().min(2, {
-    message: "Foto Usaha must be at least 2 characters.",
+  fotoRumah: z.string().min(2, {
+    message: "Foto Rumah must be at least 2 characters.",
+  }),
+  keperluan: z.string().min(2, {
+    message: "Keperluan must be at least 2 characters.",
   }),
 });
 
-export default function FormDomisiliUsaha() {
+export default function FormTidakMampu() {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
-  const form = useForm<z.infer<typeof domisiliUsaha>>({
-    resolver: zodResolver(domisiliUsaha),
+  const form = useForm<z.infer<typeof tidakMampuSchema>>({
+    resolver: zodResolver(tidakMampuSchema),
     defaultValues: {
-      ...defaultValueDomisiliUsaha,
+      ...defaultValueTidakMampu,
     },
     mode: "onChange",
   });
 
-  function onSubmit(values: z.infer<typeof domisiliUsaha>) {
+  function onSubmit(values: z.infer<typeof tidakMampuSchema>) {
     startTransition(() => {
-      createDomisiliUsaha(values)
+      createTidakMampu(values)
         .then((data) => {
           form.reset();
           toast.success("Success create letter");
@@ -77,8 +92,8 @@ export default function FormDomisiliUsaha() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-4"
       >
-        {keyDomisiliUsaha.map((key) => {
-          return key.name === "fotoKtp" || key.name === "fotoUsaha" ? (
+        {keyTidakMampu.map((key) => {
+          return key.name === "fotoKtp" || key.name === "fotoRumah" ? (
             <motion.div key={key.label} layout>
               {!formValues[key.name] && (
                 <>
@@ -93,7 +108,9 @@ export default function FormDomisiliUsaha() {
                 </>
               )}
               {formValues[key.name] && (
-                <motion.div layout className="relative w-fit mx-auto">
+                <motion.div layout className="relative w-fit mx-auto"
+                  key={key.name}
+                >
                   <Image
                     src={formValues[key.name]}
                     alt={key.label}
@@ -111,6 +128,24 @@ export default function FormDomisiliUsaha() {
                 </motion.div>
               )}
             </motion.div>
+          ) : key.name === "tanggalLahir" ? (
+            <FormDate
+              key={key.name}
+              name={key.name}
+              label={key.label}
+              control={form.control}
+            />
+          ) : key.name === "pendapatan" ? (
+            <>
+              <FormInput
+                key={key.name}
+                name={key.name}
+                label={key.label}
+                control={form.control}
+                placeholder={key.label}
+                type="number"
+              />
+            </>
           ) : (
             <FormInput
               key={key.name}

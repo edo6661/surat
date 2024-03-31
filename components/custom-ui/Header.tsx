@@ -2,8 +2,10 @@ import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
+import { getCurrentUser } from "@/services/user";
 
-const Header = () => {
+const Header = async () => {
+  const user = await getCurrentUser()
   return (
     <>
       <header>
@@ -15,8 +17,11 @@ const Header = () => {
               <SignedIn>
                 <div className="fl-ic gap-4">
                   <Link href="/create-letter">Create Letter</Link>
-                  <UserButton afterSignOutUrl="/" />
                 </div>
+                {/* {user?.role === "STAFF" && ( */}
+                <Link href="/letters">Letters</Link>
+                {/* )} */}
+                <UserButton afterSignOutUrl="/" />
               </SignedIn>
               <SignedOut>
                 <Button asChild variant="secondary">

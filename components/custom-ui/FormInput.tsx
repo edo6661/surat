@@ -15,6 +15,8 @@ interface FormInputProps {
   name: string;
   placeholder: string;
   description?: string;
+  type?: string;
+
 }
 
 const FormInput = ({
@@ -23,6 +25,7 @@ const FormInput = ({
   name,
   placeholder,
   description,
+  type
 }: FormInputProps) => {
   return (
     <FormField
@@ -32,7 +35,7 @@ const FormInput = ({
         <FormItem>
           <FormLabel>{label}</FormLabel>
           <FormControl>
-            <Input placeholder={placeholder} {...field} />
+            <Input placeholder={placeholder} {...field} type={type} />
           </FormControl>
           {description && <FormDescription>{description}</FormDescription>}
           <FormMessage />

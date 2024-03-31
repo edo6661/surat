@@ -43,7 +43,7 @@ export const defaultValueTinggalPenduduk = {
   nama: "",
   nik: "",
   tempatLahir: "",
-  tanggalLahir: "",
+  tanggalLahir: new Date(),
   alamatAsal: "",
   alamatSekarang: "",
   fotoKtp: "",
@@ -87,17 +87,17 @@ export const keyTinggalPenduduk = [
 
 export const defaultValueKelahiran = {
   jenisKelamin: "",
-  tanggalLahir: "",
+  tanggalLahir: new Date(),
   tempatLahir: "",
   agama: "",
   namaAyah: "",
   tempatLahirAyah: "",
-  tanggalLahirAyah: "",
+  tanggalLahirAyah: new Date(),
   agamaAyah: "",
   pekerjaanAyah: "",
   namaIbu: "",
   tempatLahirIbu: "",
-  tanggalLahirIbu: "",
+  tanggalLahirIbu: new Date(),
   agamaIbu: "",
   pekerjaanIbu: "",
   fotoKtpAyah: "",
@@ -179,8 +179,8 @@ export const keyKelahiran = [
 export const defaultValueKematian = {
   nama: "",
   nik: "",
-  tanggalLahir: "",
-  tanggalKematian: "",
+  tanggalLahir: new Date(),
+  tanggalKematian: new Date(),
   tempatLahir: "",
   jenisKelamin: "",
   alamat: "",
@@ -249,7 +249,7 @@ export const keyKematian = [
 export const defaultValueTidakMampuSekolah = {
   nama: "",
   tempatLahir: "",
-  tanggalLahir: "",
+  tanggalLahir: new Date(),
   jenisKelamin: "",
   agama: "",
   alamat: "",
@@ -257,7 +257,7 @@ export const defaultValueTidakMampuSekolah = {
   namaAyah: "",
   nikAyah: "",
   tempatLahirAyah: "",
-  tanggalLahirAyah: "",
+  tanggalLahirAyah: new Date(),
   agamaAyah: "",
   pekerjaanAyah: "",
   fotoKtpAyah: "",
@@ -332,7 +332,7 @@ export const defaultValuePengantarSKCK = {
   nik: "",
   jenisKelamin: "",
   tempatLahir: "",
-  tanggalLahir: "",
+  tanggalLahir: new Date(),
   alamat: "",
   pekerjaan: "",
   keperluan: "",
@@ -381,7 +381,7 @@ export const defaultValueKeteranganUsaha = {
   nama: "",
   nik: "",
   tempatLahir: "",
-  tanggalLahir: "",
+  tanggalLahir: new Date(),
   agama: "",
   pekerjaan: "",
   alamat: "",
@@ -448,10 +448,10 @@ export const defaultValueTidakMampu = {
   nik: "",
   jenisKelamin: "",
   tempatLahir: "",
-  tanggalLahir: "",
+  tanggalLahir: new Date(),
   agama: "",
   alasanTidakMampu: "",
-  pendapatan: 0,
+  pendapatan: "",
   alamat: "",
   pekerjaan: "",
   fotoKtp: "",
@@ -516,26 +516,99 @@ export const keyTidakMampu = [
 
 export const defaultValueKeteranganSuamiIstri = {
   namaSuami: "",
+  nikSuami: "",
+  tempatLahirSuami: "",
+  tanggalLahirSuami: new Date(),
+  agamaSuami: "",
+  alamatSuami: "",
+  pekerjaanSuami: "",
   namaIstri: "",
+  nikIstri: "",
   tempatPernikahan: "",
-  tanggalPernikahan: "",
-  fotoKtp: "",
+  tanggalPernikahan: new Date(),
+  agamaIstri: "",
+  alamatIstri: "",
+  pekerjaanIstri: "",
+  fotoKtpSuami: "",
+  fotoKtpIstri: "",
   fotoBukuNikah: "",
 };
 
 export const keyKeteranganSuamiIstri = [
-  "namaSuami",
-  "namaIstri",
-  "tempatPernikahan",
-  "tanggalPernikahan",
-  "fotoKtp",
-  "fotoBukuNikah",
+  {
+    label: "Nama Suami",
+    name: "namaSuami",
+  },
+  {
+    label: "NIK Suami",
+    name: "nikSuami",
+  },
+  {
+    label: "Tempat Lahir Suami",
+    name: "tempatLahirSuami",
+  },
+  {
+    label: "Tanggal Lahir Suami",
+    name: "tanggalLahirSuami",
+  },
+  {
+    label: "Agama Suami",
+    name: "agamaSuami",
+  },
+  {
+    label: "Alamat Suami",
+    name: "alamatSuami",
+  },
+  {
+    label: "Pekerjaan Suami",
+    name: "pekerjaanSuami",
+  },
+  {
+    label: "Nama Istri",
+    name: "namaIstri",
+  },
+  {
+    label: "NIK Istri",
+    name: "nikIstri",
+  },
+  {
+    label: "Tempat Pernikahan",
+    name: "tempatPernikahan",
+  },
+  {
+    label: "Tanggal Pernikahan",
+    name: "tanggalPernikahan",
+  },
+  {
+    label: "Agama Istri",
+    name: "agamaIstri",
+  },
+  {
+    label: "Alamat Istri",
+    name: "alamatIstri",
+  },
+  {
+    label: "Pekerjaan Istri",
+    name: "pekerjaanIstri",
+  },
+  {
+    label: "Foto KTP Suami",
+    name: "fotoKtpSuami",
+  },
+  {
+    label: "Foto KTP Istri",
+    name: "fotoKtpIstri",
+  },
+  {
+    label: "Foto Buku Nikah",
+    name: "fotoBukuNikah",
+  },
 ];
 
 export const defaultValueKeteranganBelumMenikah = {
   nama: "",
   tempatLahir: "",
-  tanggalLahir: "",
+  tanggalLahir: new Date(),
   agama: "",
   alamat: "",
   pekerjaan: "",
@@ -546,14 +619,45 @@ export const defaultValueKeteranganBelumMenikah = {
 };
 
 export const keyKeteranganBelumMenikah = [
-  "nama",
-  "tempatLahir",
-  "tanggalLahir",
-  "agama",
-  "alamat",
-  "pekerjaan",
-  "nik",
-  "fotoKtp",
-  "fotoKk",
-  "fotoAktaKelahiran",
+  {
+    label: "Nama",
+    name: "nama",
+  },
+  {
+    label: "Tempat Lahir",
+    name: "tempatLahir",
+  },
+  {
+    label: "Tanggal Lahir",
+    name: "tanggalLahir",
+  },
+  {
+    label: "Agama",
+    name: "agama",
+  },
+  {
+    label: "Pekerjaan",
+    name: "pekerjaan",
+  },
+  {
+    label: "NIK",
+    name: "nik",
+  },
+  {
+    label: "Alamat",
+    name: "alamat",
+  },
+  {
+    label: "Foto Ktp",
+    name: "fotoKtp",
+  },
+
+  {
+    label: "Foto Kk",
+    name: "fotoKk",
+  },
+  {
+    label: "Foto Akta Kelahiran",
+    name: "fotoAktaKelahiran",
+  },
 ];

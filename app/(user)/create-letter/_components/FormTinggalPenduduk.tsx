@@ -16,22 +16,33 @@ import UploadImage from "@/components/custom-ui/UploadImage";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import { X } from "lucide-react";
+import FormDate from "@/components/custom-ui/FormDate";
+import { createTinggalPenduduk } from "@/actions/tinggalPenduduk";
+import { useTransition } from "react";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
-const formSchema = z.object({
+export const tinggalPenduduk = z.object({
   nama: z.string().min(2, {
     message: "Nama must be at least 2 characters.",
   }),
   nik: z.string().min(2, {
     message: "NIK must be at least 2 characters.",
   }),
-  alamat: z.string().min(2, {
-    message: "Alamat must be at least 2 characters.",
+  tempatLahir: z.string().min(2, {
+    message: "Tempat Lahir must be at least 2 characters.",
+  }),
+  tanggalLahir: z.date({
+    required_error: "Tanggal Lahir is required",
+  }),
+  alamatAsal: z.string().min(2, {
+    message: "Alamat Asal must be at least 2 characters.",
+  }),
+  alamatSekarang: z.string().min(2, {
+    message: "Alamat Sekarang must be at least 2 characters.",
   }),
   fotoKtp: z.string().min(2, {
     message: "Foto KTP must be at least 2 characters.",
-  }),
-  fotoUsaha: z.string().min(2, {
-    message: "Foto Usaha must be at least 2 characters.",
   }),
   fotoKk: z.string().min(2, {
     message: "Foto KK must be at least 2 characters.",
@@ -39,16 +50,28 @@ const formSchema = z.object({
 });
 
 export default function FormTinggalPenduduk() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter()
+  const form = useForm<z.infer<typeof tinggalPenduduk>>({
+    resolver: zodResolver(tinggalPenduduk),
     defaultValues: {
       ...defaultValueTinggalPenduduk,
     },
     mode: "onChange",
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  function onSubmit(values: z.infer<typeof tinggalPenduduk>) {
+    startTransition(() => {
+      createTinggalPenduduk(values)
+        .then((data) => {
+          form.reset();
+          toast.success("Success create letter");
+          router.push("/letters");
+        })
+        .catch((err) => {
+          toast.error("Failed create letter");
+        });
+    });
   }
   const { setValue, watch } = form;
 
@@ -63,7 +86,7 @@ export default function FormTinggalPenduduk() {
       >
         {keyTinggalPenduduk.map((key) => {
           return key.name === "fotoKtp" || key.name === "fotoKk" ? (
-            <motion.div key={key.label} layout>
+            <motion.div key={key.name} layout>
               {!formValues[key.name] && (
                 <>
                   <motion.div layout className="text-center space-y-2">
@@ -95,17 +118,26 @@ export default function FormTinggalPenduduk() {
                 </motion.div>
               )}
             </motion.div>
-          ) : (
-            <FormInput
-              key={key.name}
-              name={key.name}
-              label={key.label}
-              control={form.control}
-              placeholder={key.label}
-            />
-          );
+          ) : // TODO
+            key.name === "tanggalLahir" ? (
+              <>
+                <FormDate
+                  name={key.name}
+                  label={key.label}
+                  control={form.control}
+                />
+              </>
+            ) : (
+              <FormInput
+                key={key.name}
+                name={key.name}
+                label={key.label}
+                control={form.control}
+                placeholder={key.label}
+              />
+            );
         })}
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={isPending}>Submit</Button>
       </motion.form>
     </Form>
   );

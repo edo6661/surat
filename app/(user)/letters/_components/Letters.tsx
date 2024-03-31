@@ -15,7 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import DomisiliUsaha from './DomisiliUsaha'
+import FormDomisiliUsaha from './KeteranganDomisiliUsaha'
 import { LetterAllRelation } from '@/types'
 import { FormulirType, tableHeadDomisiliUsaha, tableHeadKelahiran, tableHeadKematian, tableHeadKeteranganBelumMenikah, tableHeadKeteranganSuamiIstri, tableHeadKeteranganUsaha, tableHeadPengantarSKCK, tableHeadTidakMampu, tableHeadTidakMampuSekolah, tableHeadTinggalPenduduk } from "@/constants/letter"
 import { useState } from "react"
@@ -155,7 +155,7 @@ const Letters = (
             <TableBody>
               {letters?.map((letter) => {
                 return selectedItem === "Domisili Usaha" ? (
-                  <DomisiliUsaha key={letter.id} {...letter} domisiliUsaha={letter.domisiliUsaha!}
+                  <FormDomisiliUsaha key={letter.id} {...letter} domisiliUsaha={letter.domisiliUsaha!}
                     currentUser={currentUser}
 
                   />

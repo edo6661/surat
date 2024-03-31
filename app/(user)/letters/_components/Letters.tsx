@@ -30,6 +30,7 @@ import TidakMampu from "./KeteranganTidakMampu"
 import KeteranganUsaha from "./KeteranganUsaha"
 import KeteranganSuamiIstri from "./KeteranganSuamiIstri"
 import { User } from "@prisma/client"
+import { Heading } from "lucide-react"
 
 interface LettersProps {
   lettersDomisiliUsaha: LetterAllRelation[]
@@ -153,7 +154,7 @@ const Letters = (
               </TableRow>
             </TableHeader>
             <TableBody>
-              {letters?.map((letter) => {
+              {letters.length > 0 ? letters?.map((letter) => {
                 return selectedItem === "Domisili Usaha" ? (
                   <FormDomisiliUsaha key={letter.id} {...letter} domisiliUsaha={letter.domisiliUsaha!}
                     currentUser={currentUser}
@@ -202,7 +203,9 @@ const Letters = (
 
                   />
                 ) : null
-              })}
+              }) : <Heading>
+                Empty Data
+              </Heading>}
             </TableBody>
           </Table>
         </CardContent>

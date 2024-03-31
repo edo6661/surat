@@ -1,8 +1,11 @@
+import { deleteLetterWithId } from '@/actions/letter';
+import AlertDialog from '@/components/custom-ui/AlertDialog';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { formatDate } from '@/utils/formateDate';
 import { Kematian, Letter, User } from '@prisma/client';
 import Image from 'next/image';
-import React from 'react';
+import React, { useTransition } from 'react';
+import { toast } from 'sonner';
 
 interface KematianProps extends Letter {
   kematian: Kematian;
@@ -10,7 +13,22 @@ interface KematianProps extends Letter {
   currentUser: User;
 }
 
-const KeteranganKematian = ({ kematian, user, currentUser }: KematianProps) => {
+const KeteranganKematian = ({ kematian, user, id, currentUser }: KematianProps) => {
+
+  const [isPending, startTransition] = useTransition();
+  const handleDelete = async () => {
+    startTransition(() => {
+      deleteLetterWithId(id)
+        .then((data) => {
+          toast.success(`Data ${user.username} has been deleted`);
+        })
+        .catch((err) => {
+          console.error(err);
+          toast.error(`Failed to delete data: ${err.message}`);
+        });
+    });
+  };
+
   return (
     <TableRow>
       {currentUser.role === "APPLICANT" ? null :
@@ -48,6 +66,19 @@ const KeteranganKematian = ({ kematian, user, currentUser }: KematianProps) => {
         />
       </TableCell>
       <TableCell>{formatDate(kematian.createdAt)}</TableCell>
+      {
+        currentUser.role !== "APPLICANT" && (
+          <TableCell>
+            <AlertDialog
+              action={handleDelete}
+              isPending={isPending}
+              trigger={
+                isPending ? "Deleting..." : "Delete"
+              }
+            />
+          </TableCell>
+        )
+      }
     </TableRow>
   );
 };

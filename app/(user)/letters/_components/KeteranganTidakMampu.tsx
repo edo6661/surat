@@ -1,8 +1,11 @@
+import { deleteLetterWithId } from '@/actions/letter';
+import AlertDialog from '@/components/custom-ui/AlertDialog';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { formatDate } from '@/utils/formateDate';
 import { TidakMampu, Letter, User } from '@prisma/client';
 import Image from 'next/image';
-import React from 'react';
+import React, { useTransition } from 'react';
+import { toast } from 'sonner';
 
 interface TidakMampuProps extends Letter {
   tidakMampu: TidakMampu;
@@ -10,7 +13,22 @@ interface TidakMampuProps extends Letter {
   currentUser: User;
 }
 
-const KeteranganTidakMampu = ({ tidakMampu, user, currentUser }: TidakMampuProps) => {
+const KeteranganTidakMampu = ({ tidakMampu, user, currentUser, id }: TidakMampuProps) => {
+
+  const [isPending, startTransition] = useTransition();
+  const handleDelete = async () => {
+    startTransition(() => {
+      deleteLetterWithId(id)
+        .then((data) => {
+          toast.success(`Data ${user.username} has been deleted`);
+        })
+        .catch((err) => {
+          console.error(err);
+          toast.error(`Failed to delete data: ${err.message}`);
+        });
+    });
+  };
+
   return (
     <TableRow>
       {currentUser.role === "APPLICANT" ? null :
@@ -48,6 +66,19 @@ const KeteranganTidakMampu = ({ tidakMampu, user, currentUser }: TidakMampuProps
       </TableCell>
       <TableCell>{tidakMampu.keperluan}</TableCell>
       <TableCell>{formatDate(tidakMampu.createdAt)}</TableCell>
+      {
+        currentUser.role !== "APPLICANT" && (
+          <TableCell>
+            <AlertDialog
+              action={handleDelete}
+              isPending={isPending}
+              trigger={
+                isPending ? "Deleting..." : "Delete"
+              }
+            />
+          </TableCell>
+        )
+      }
     </TableRow>
   );
 };

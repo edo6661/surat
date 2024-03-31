@@ -15,6 +15,33 @@ const allTrue = {
   keteranganBelumMenikah: true,
 };
 
+export const getAllLetters = async () => {
+  try {
+    return await db.letter.findMany({
+      include: {
+        ...allTrue,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+export const getCurrentUserLetters = async () => {
+  const user = await getCurrentUser();
+  try {
+    return await db.letter.findMany({
+      include: {
+        ...allTrue,
+      },
+      where: {
+        userId: user?.id,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const getAllLettersDomisiliUsaha = async () => {
   try {
     return await db.letter.findMany({

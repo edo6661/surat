@@ -1,8 +1,11 @@
+import { deleteLetterWithId } from '@/actions/letter';
+import AlertDialog from '@/components/custom-ui/AlertDialog';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { formatDate } from '@/utils/formateDate';
 import { KeteranganBelumMenikah, Letter, User } from '@prisma/client';
 import Image from 'next/image';
-import React from 'react';
+import React, { useTransition } from 'react';
+import { toast } from 'sonner';
 
 interface KeteranganBelumMenikahProps extends Letter {
   keteranganBelumMenikah: KeteranganBelumMenikah;
@@ -11,8 +14,23 @@ interface KeteranganBelumMenikahProps extends Letter {
 }
 
 const BelumMenikah = ({ keteranganBelumMenikah, user,
-  currentUser
+  currentUser, id
 }: KeteranganBelumMenikahProps) => {
+
+  const [isPending, startTransition] = useTransition();
+  const handleDelete = async () => {
+    startTransition(() => {
+      deleteLetterWithId(id)
+        .then((data) => {
+          toast.success(`Data ${user.username} has been deleted`);
+        })
+        .catch((err) => {
+          console.error(err);
+          toast.error(`Failed to delete data: ${err.message}`);
+        });
+    });
+  };
+
   return (
     <TableRow>
       {currentUser.role === "APPLICANT" ? null :
@@ -55,6 +73,19 @@ const BelumMenikah = ({ keteranganBelumMenikah, user,
         />
       </TableCell>
       <TableCell>{formatDate(keteranganBelumMenikah.createdAt)}</TableCell>
+      {
+        currentUser.role !== "APPLICANT" && (
+          <TableCell>
+            <AlertDialog
+              action={handleDelete}
+              isPending={isPending}
+              trigger={
+                isPending ? "Deleting..." : "Delete"
+              }
+            />
+          </TableCell>
+        )
+      }
     </TableRow>
   );
 };

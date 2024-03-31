@@ -33,16 +33,16 @@ import { User } from "@prisma/client"
 import { Heading } from "@/components/custom-ui/heading"
 
 interface LettersProps {
-  lettersDomisiliUsaha: LetterAllRelation[]
-  lettersTinggalPenduduk: LetterAllRelation[]
-  lettersKelahiran: LetterAllRelation[]
-  lettersKematian: LetterAllRelation[]
-  lettersTidakMampuSekolah: LetterAllRelation[]
-  lettersSkck: LetterAllRelation[]
-  lettersUsaha: LetterAllRelation[]
-  lettersTidakMampu: LetterAllRelation[]
-  lettersSuamiIstri: LetterAllRelation[]
-  lettersBelumMenikah: LetterAllRelation[]
+  // lettersDomisiliUsaha: LetterAllRelation[]
+  // lettersTinggalPenduduk: LetterAllRelation[]
+  // lettersKelahiran: LetterAllRelation[]
+  // lettersKematian: LetterAllRelation[]
+  // lettersTidakMampuSekolah: LetterAllRelation[]
+  // lettersSkck: LetterAllRelation[]
+  // lettersUsaha: LetterAllRelation[]
+  // lettersTidakMampu: LetterAllRelation[]
+  // lettersSuamiIstri: LetterAllRelation[]
+  // lettersBelumMenikah: LetterAllRelation[]
   // userLettersDomisiliUsaha: LetterAllRelation[]
   // userLettersTinggalPenduduk: LetterAllRelation[]
   // userLettersKelahiran: LetterAllRelation[]
@@ -53,21 +53,24 @@ interface LettersProps {
   // userLettersTidakMampu: LetterAllRelation[]
   // userLettersSuamiIstri: LetterAllRelation[]
   // userLettersBelumMenikah: LetterAllRelation[]
+  allLetters: LetterAllRelation[]
+  userLetters: LetterAllRelation[]
   currentUser: User
 }
 
 
 const Letters = (
-  { lettersDomisiliUsaha,
-    lettersTinggalPenduduk,
-    lettersKelahiran,
-    lettersKematian,
-    lettersTidakMampuSekolah,
-    lettersSkck,
-    lettersUsaha,
-    lettersTidakMampu,
-    lettersSuamiIstri,
-    lettersBelumMenikah,
+  {
+    // lettersDomisiliUsaha,
+    // lettersTinggalPenduduk,
+    // lettersKelahiran,
+    // lettersKematian,
+    // lettersTidakMampuSekolah,
+    // lettersSkck,
+    // lettersUsaha,
+    // lettersTidakMampu,
+    // lettersSuamiIstri,
+    // lettersBelumMenikah,
     // userLettersDomisiliUsaha,
     // userLettersTinggalPenduduk,
     // userLettersKelahiran,
@@ -78,6 +81,8 @@ const Letters = (
     // userLettersTidakMampu,
     // userLettersSuamiIstri,
     // userLettersBelumMenikah,
+    allLetters,
+    userLetters,
     currentUser
   }: LettersProps
 ) => {
@@ -102,32 +107,34 @@ const Letters = (
   const tableHead = tableHeadMappings[selectedItem!] || []
 
   const lettersMap = {
-    "Domisili Usaha": lettersDomisiliUsaha,
-    "Tinggal Penduduk": lettersTinggalPenduduk,
-    "Belum Menikah": lettersBelumMenikah,
-    "Kelahiran": lettersKelahiran,
-    "Kematian": lettersKematian,
-    "Pengantar SKCK": lettersSkck,
-    "Suami Istri": lettersSuamiIstri,
-    "Tidak Mampu (Sekolah)": lettersTidakMampuSekolah,
-    "Tidak Mampu (Umum)": lettersTidakMampu,
-    "Usaha": lettersUsaha,
-  }
-  // const userLettersMap = {
-  //   "Domisili Usaha": userLettersDomisiliUsaha,
-  //   "Tinggal Penduduk": userLettersTinggalPenduduk,
-  //   "Belum Menikah": userLettersBelumMenikah,
-  //   "Kelahiran": userLettersKelahiran,
-  //   "Kematian": userLettersKematian,
-  //   "Pengantar SKCK": userLettersSkck,
-  //   "Suami Istri": userLettersSuamiIstri,
-  //   "Tidak Mampu (Sekolah)": userLettersTidakMampuSekolah,
-  //   "Tidak Mampu (Umum)": userLettersTidakMampu,
-  //   "Usaha": userLettersUsaha,
-  // }
+    "Domisili Usaha": allLetters.filter(letter => letter.domisiliUsahaId !== null),
+    "Tinggal Penduduk": allLetters.filter(letter => letter.tinggalPendudukId !== null),
+    "Kelahiran": allLetters.filter(letter => letter.kelahiranId !== null),
+    "Kematian": allLetters.filter(letter => letter.kematianId !== null),
+    "Tidak Mampu (Sekolah)": allLetters.filter(letter => letter.tidakMampuSekolahId !== null),
+    "Pengantar SKCK": allLetters.filter(letter => letter.pengantarSKCKId !== null),
+    "Usaha": allLetters.filter(letter => letter.keteranganUsahaId !== null),
+    "Tidak Mampu (Umum)": allLetters.filter(letter => letter.tidakMampuId !== null),
+    "Suami Istri": allLetters.filter(letter => letter.keteranganSuamiIstriId !== null),
+    "Belum Menikah": allLetters.filter(letter => letter.keteranganBelumMenikahId !== null),
+  };
 
-  // const letters = currentUser.role === "APPLICANT" ? userLettersMap[selectedItem!] || [] : lettersMap[selectedItem!] || []
-  const letters = lettersMap[selectedItem!] || []
+  const userLettersMap = {
+    "Domisili Usaha": userLetters.filter(letter => letter.domisiliUsahaId !== null),
+    "Tinggal Penduduk": userLetters.filter(letter => letter.tinggalPendudukId !== null),
+    "Kelahiran": userLetters.filter(letter => letter.kelahiranId !== null),
+    "Kematian": userLetters.filter(letter => letter.kematianId !== null),
+    "Tidak Mampu (Sekolah)": userLetters.filter(letter => letter.tidakMampuSekolahId !== null),
+    "Pengantar SKCK": userLetters.filter(letter => letter.pengantarSKCKId !== null),
+    "Usaha": userLetters.filter(letter => letter.keteranganUsahaId !== null),
+    "Tidak Mampu (Umum)": userLetters.filter(letter => letter.tidakMampuId !== null),
+    "Suami Istri": userLetters.filter(letter => letter.keteranganSuamiIstriId !== null),
+    "Belum Menikah": userLetters.filter(letter => letter.keteranganBelumMenikahId !== null),
+  };
+
+  // @ts-ignore
+  const letters = currentUser.role === "APPLICANT" ? userLettersMap[selectedItem!] || [] : lettersMap[selectedItem!] || []
+
 
   return (
     <section className='base-container'>
@@ -154,7 +161,7 @@ const Letters = (
               </TableRow>
             </TableHeader>
             <TableBody>
-              {letters.length > 0 ? letters?.map((letter) => {
+              {letters.length > 0 ? letters?.map((letter: any) => {
                 return selectedItem === "Domisili Usaha" ? (
                   <FormDomisiliUsaha key={letter.id} {...letter} domisiliUsaha={letter.domisiliUsaha!}
                     currentUser={currentUser}
@@ -195,12 +202,10 @@ const Letters = (
                 ) : selectedItem === "Usaha" ? (
                   <KeteranganUsaha key={letter.id} {...letter} keteranganUsaha={letter?.keteranganUsaha!}
                     currentUser={currentUser}
-
                   />
                 ) : selectedItem === "Tinggal Penduduk" ? (
                   <TinggalPenduduk key={letter.id} {...letter} tinggalPenduduk={letter?.tinggalPenduduk!}
                     currentUser={currentUser}
-
                   />
                 ) : null
               }) : null}

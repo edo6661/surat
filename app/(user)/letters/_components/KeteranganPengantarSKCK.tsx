@@ -10,7 +10,7 @@ interface PengantarSKCKProps extends Letter {
   currentUser: User;
 }
 
-const PengantarSKCK = ({ pengantarSKCK, user, currentUser }: PengantarSKCKProps) => {
+const KeteranganPengantarSKCK = ({ pengantarSKCK, user, currentUser }: PengantarSKCKProps) => {
   return (
     <TableRow>
       {currentUser.role === "APPLICANT" ? null :
@@ -40,4 +40,4 @@ const PengantarSKCK = ({ pengantarSKCK, user, currentUser }: PengantarSKCKProps)
   );
 };
 
-export default PengantarSKCK;
+export default KeteranganPengantarSKCK;

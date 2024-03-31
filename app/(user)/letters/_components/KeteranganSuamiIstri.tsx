@@ -10,7 +10,7 @@ interface KeteranganSuamiIstriProps extends Letter {
   currentUser: User;
 }
 
-const KeteranganSuamiIstri = ({ keteranganSuamiIstri, user, currentUser }: KeteranganSuamiIstriProps) => {
+const SuamiIstri = ({ keteranganSuamiIstri, user, currentUser }: KeteranganSuamiIstriProps) => {
   return (
     <TableRow>
       {currentUser.role === "APPLICANT" ? null :
@@ -64,4 +64,4 @@ const KeteranganSuamiIstri = ({ keteranganSuamiIstri, user, currentUser }: Keter
   );
 };
 
-export default KeteranganSuamiIstri;
+export default SuamiIstri;

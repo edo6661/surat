@@ -10,7 +10,7 @@ interface TinggalPendudukProps extends Letter {
   currentUser: User;
 }
 
-const TinggalPenduduk = ({ tinggalPenduduk, user, currentUser }: TinggalPendudukProps) => {
+const KeteranganTInggalPenduduk = ({ tinggalPenduduk, user, currentUser }: TinggalPendudukProps) => {
   return (
     <TableRow>
       {currentUser.role === "APPLICANT" ? null :
@@ -47,4 +47,4 @@ const TinggalPenduduk = ({ tinggalPenduduk, user, currentUser }: TinggalPenduduk
   );
 };
 
-export default TinggalPenduduk;
+export default KeteranganTInggalPenduduk;

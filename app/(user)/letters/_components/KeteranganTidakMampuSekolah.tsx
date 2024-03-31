@@ -10,7 +10,7 @@ interface TidakMampuSekolahProps extends Letter {
   currentUser: User;
 }
 
-const TidakMampuSekolah = ({ tidakMampuSekolah, user, currentUser }: TidakMampuSekolahProps) => {
+const KeteranganTidakMampuSekolah = ({ tidakMampuSekolah, user, currentUser }: TidakMampuSekolahProps) => {
   return (
     <TableRow>
       {currentUser.role === "APPLICANT" ? null :
@@ -54,4 +54,4 @@ const TidakMampuSekolah = ({ tidakMampuSekolah, user, currentUser }: TidakMampuS
   );
 };
 
-export default TidakMampuSekolah;
+export default KeteranganTidakMampuSekolah;

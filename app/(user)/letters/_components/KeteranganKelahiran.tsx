@@ -10,7 +10,7 @@ interface KelahiranProps extends Letter {
   currentUser: User;
 }
 
-const Kelahiran = ({ kelahiran, user, currentUser }: KelahiranProps) => {
+const KeteranganKelahiran = ({ kelahiran, user, currentUser }: KelahiranProps) => {
   return (
     <TableRow>
       {currentUser.role === "APPLICANT" ? null :
@@ -63,4 +63,4 @@ const Kelahiran = ({ kelahiran, user, currentUser }: KelahiranProps) => {
   );
 };
 
-export default Kelahiran;
+export default KeteranganKelahiran;

@@ -8,7 +8,7 @@ interface DomisiliUsahaProps extends Letter {
   user: User;
   currentUser: User;
 }
-const KeteranganDomisiliUsaha = (
+const DomisiliUsaha = (
   { domisiliUsaha, user, currentUser }: DomisiliUsahaProps
 ) => {
   return (
@@ -58,4 +58,4 @@ const KeteranganDomisiliUsaha = (
   )
 }
 
-export default KeteranganDomisiliUsaha
+export default DomisiliUsaha

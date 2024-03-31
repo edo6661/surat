@@ -10,7 +10,7 @@ interface KeteranganBelumMenikahProps extends Letter {
   currentUser: User;
 }
 
-const KeteranganBelumMenikah = ({ keteranganBelumMenikah, user,
+const BelumMenikah = ({ keteranganBelumMenikah, user,
   currentUser
 }: KeteranganBelumMenikahProps) => {
   return (
@@ -59,4 +59,4 @@ const KeteranganBelumMenikah = ({ keteranganBelumMenikah, user,
   );
 };
 
-export default KeteranganBelumMenikah;
+export default BelumMenikah;

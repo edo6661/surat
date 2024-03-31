@@ -18,6 +18,7 @@ const KeteranganUsaha = ({ keteranganUsaha, user, currentUser }: KeteranganUsaha
           {user.username}
         </TableCell>
       }
+
       <TableCell>{keteranganUsaha.nama}</TableCell>
       <TableCell>{keteranganUsaha.nik}</TableCell>
       <TableCell>{keteranganUsaha.tempatLahir}</TableCell>

@@ -10,7 +10,7 @@ interface KematianProps extends Letter {
   currentUser: User;
 }
 
-const Kematian = ({ kematian, user, currentUser }: KematianProps) => {
+const KeteranganKematian = ({ kematian, user, currentUser }: KematianProps) => {
   return (
     <TableRow>
       {currentUser.role === "APPLICANT" ? null :
@@ -52,4 +52,4 @@ const Kematian = ({ kematian, user, currentUser }: KematianProps) => {
   );
 };
 
-export default Kematian;
+export default KeteranganKematian;

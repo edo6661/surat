@@ -33,3 +33,20 @@ export const toggleApproveLetterWithId = async (
     console.error(err);
   }
 };
+export const addSignatureToLetter = async (id: string, signature: string) => {
+  try {
+    await db.letter.update({
+      where: {
+        id,
+      },
+      data: {
+        signature,
+        approved: true,
+      },
+    });
+    revalidatePath("/letters");
+    revalidatePath(`/letters/${id}`);
+  } catch (err) {
+    console.error(err);
+  }
+};

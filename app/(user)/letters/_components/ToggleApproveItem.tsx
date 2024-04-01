@@ -6,13 +6,20 @@ import { toast } from 'sonner'
 interface ToggleApproveItemProps {
   approved: boolean
   id: string
+  signature: string
 }
 const ToggleApproveItem = (
-  { approved, id }: ToggleApproveItemProps
+  { approved, id, signature }: ToggleApproveItemProps
 ) => {
   const [isPending, startTransition] = useTransition();
   const handleApprove = async () => {
     startTransition(() => {
+
+      if (signature && approved) {
+        toast.error('Cannot dissaprove letter with signature');
+        return;
+      }
+
       toggleApproveLetterWithId(id, approved)
         .then((data) => {
           toast.success(`Changes has been saved`);
@@ -24,7 +31,9 @@ const ToggleApproveItem = (
     });
   };
   return (
-    <TableCell>
+    <TableCell
+      onClick={(e) => e.stopPropagation()}
+    >
       <Button
         variant={approved ? "default" : "destructive"}
         size="sm"

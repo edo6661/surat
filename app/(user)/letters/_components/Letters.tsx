@@ -162,6 +162,8 @@ const Letters = (
             </TableHeader>
             <TableBody>
               {letters.length > 0 ? letters?.map((letter) => {
+                // ! only this can be signatured
+                // TODO : add signature to other letters
                 return selectedItem === "Domisili Usaha" ? (
                   <FormDomisiliUsaha key={letter.id} {...letter} domisiliUsaha={letter.domisiliUsaha!}
                     currentUser={currentUser}

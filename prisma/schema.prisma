@@ -39,6 +39,7 @@ model Letter {
   tidakMampuId String?
   keteranganSuamiIstriId String?
   keteranganBelumMenikahId String?
+  signature String?
 
   
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)

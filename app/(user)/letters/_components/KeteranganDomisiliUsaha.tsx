@@ -15,7 +15,7 @@ interface DomisiliUsahaProps extends Letter {
   currentUser: User;
 }
 const KeteranganDomisiliUsaha = (
-  { domisiliUsaha, user, currentUser, id, approved }: DomisiliUsahaProps
+  { domisiliUsaha, user, currentUser, id, approved, signature }: DomisiliUsahaProps
 ) => {
   const [isPending, startTransition] = useTransition();
   const handleDelete = async () => {
@@ -86,8 +86,11 @@ const KeteranganDomisiliUsaha = (
           <ToggleApproveItem
             id={id}
             approved={approved}
+            signature={signature!}
           />
-          <TableCell>
+          <TableCell
+            onClick={(e) => e.stopPropagation()}
+          >
             <AlertDialog
               action={handleDelete}
               isPending={isPending}

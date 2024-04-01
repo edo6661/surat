@@ -20,6 +20,7 @@ const SpesificLetter = (
     const fotoKtpUrl = await fetchImageBlob(letter.domisiliUsaha.fotoKtp);
     const fotoUsahaUrl = await fetchImageBlob(letter.domisiliUsaha.fotoUsaha);
     const logo = await fetchImageBlob(logoUrl);
+    const letterSignature = await fetchImageBlob(letter.signature);
     const documentDefinition = {
       header: {
         columns: [
@@ -70,17 +71,13 @@ const SpesificLetter = (
         //     { image: fotoUsahaUrl, width: 200 }
         //   ]
         // },
-        { text: 'Demikianlah surat permohonan izin usaha ini kami buat. Atas perhatian dan bantuannya, kami mengucapkan terima kasih.', style: 'normal' },
+        { text: 'Demikianlah surat permohonan izin usaha ini kami buat. Atas perhatian dclearan bantuannya, kami mengucapkan terima kasih.', style: 'normal' },
         { text: 'Hormat kami,', style: 'normal' },
         { text: `Kota Tangerang ${formatDate(letter.createdAt)}`, style: 'normal', alignment: 'right' },
         { text: `Yang Menyatakan`, style: 'normal', alignment: 'right' },
-        {
-          text: '( ___________________________ )', margin: [0, 40, 0, 40], alignment: 'right',
-        },
-        {
-          image: logo, width: 42, alignment: 'right', margin: [0, 40, 0, 40],
-
-        }
+        letterSignature ?
+          { image: letterSignature, width: 120, alignment: 'right', margin: [0, 40, 0, 40] } :
+          { text: '( ___________________________ )', margin: [0, 40, 0, 40], alignment: 'right' }
       ],
       styles: {
         header: {

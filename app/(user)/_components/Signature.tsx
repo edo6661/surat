@@ -9,12 +9,14 @@ import { addSignatureToLetter } from "@/actions/letter";
 import DialogSignature from "./DialogSignature";
 import Image from "next/image";
 import { X } from "lucide-react";
+import { User } from "@prisma/client";
 interface SignatureProps {
   id: string;
+  currentUser: User
 
 }
 export default function Signatures(
-  { id }: SignatureProps
+  { id, currentUser }: SignatureProps
 ) {
   const [image, setImage] = useState("");
   const [isPending, startTransition] = useTransition()
@@ -47,7 +49,7 @@ export default function Signatures(
     <div className="flex flex-col ">
       <div className="flex flex-col gap-2">
         {
-          !image ? (
+          !image ? currentUser.role !== 'APPLICANT' && (
             <>
               <div className="fl-ic justify-between ">
                 <Button onClick={OnSave} className="w-full rounded-none">Download</Button>
@@ -73,6 +75,7 @@ export default function Signatures(
 
               </div>
             </>
+
           ) : <>
             <div
               className="relative"

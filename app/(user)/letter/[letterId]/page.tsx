@@ -7,6 +7,7 @@ import SpesificLetter from '../../_components/SpesificLetter';
 import { logoUrl } from '@/constants';
 import { formatDate } from '@/utils/formateDate';
 import Signature from '../../_components/Signature';
+import { getCurrentUser } from '@/services/user';
 
 
 interface LetterPageProps {
@@ -19,6 +20,7 @@ const LetterPage = async (
 ) => {
   // TODO: Fetch letter data
   const letter = await getLetterById(letterId)
+  const currentUser = await getCurrentUser()
 
   return (
     <section className='base-container'>
@@ -84,7 +86,9 @@ const LetterPage = async (
                     />
                   ) :
                     <Signature
-                      id={letter.id} />
+                      id={letter.id}
+                      currentUser={currentUser!}
+                    />
                 }
 
 

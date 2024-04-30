@@ -6,7 +6,7 @@ import { toast } from 'sonner'
 interface ToggleApproveItemProps {
   approved: boolean
   id: string
-  signature: string
+  signature?: string
 }
 const ToggleApproveItem = (
   { approved, id, signature }: ToggleApproveItemProps

@@ -11,6 +11,7 @@ import ToggleApproveItem from './ToggleApproveItem';
 import { useRouter } from 'next/navigation';
 import DialogReason from './DialogReason';
 import { Input } from '@/components/ui/input';
+import DialogPhoto from '@/components/custom-ui/DialogPhoto';
 interface DomisiliUsahaProps extends Letter {
   domisiliUsaha: DomisiliUsaha;
   user: User;
@@ -50,8 +51,6 @@ const KeteranganDomisiliUsaha = (
 
   const redirectToLetter = () => router.push(`/letter/${id}`)
 
-
-
   return (
     <TableRow
       onClick={redirectToLetter}
@@ -77,23 +76,50 @@ const KeteranganDomisiliUsaha = (
       <TableCell>
         {domisiliUsaha.nik}
       </TableCell>
-      <TableCell>
-        <Image
-          src={domisiliUsaha.fotoKtp}
-          alt={domisiliUsaha.pemilikUsaha}
-          width={72}
-          height={72}
-          className=' aspect-square rounded-full'
-        />
+      <TableCell
+        onClick={(e) => e.stopPropagation()}
+      >
+        <DialogPhoto
+          trigger={
+            <Image
+              src={domisiliUsaha.fotoKtp}
+              alt={domisiliUsaha.pemilikUsaha}
+              width={72}
+              height={72}
+              className=' aspect-square rounded-full'
+            />
+          }
+        >
+          <Image
+            src={domisiliUsaha.fotoKtp}
+            alt={domisiliUsaha.pemilikUsaha}
+            width={560}
+            height={560}
+          />
+        </DialogPhoto>
       </TableCell>
-      <TableCell>
-        <Image
-          src={domisiliUsaha.fotoUsaha}
-          alt={domisiliUsaha.namaUsaha}
-          width={72}
-          height={72}
-          className=' aspect-square rounded-full'
-        />
+      <TableCell
+        onClick={(e) => e.stopPropagation()}
+      >
+        <DialogPhoto
+          trigger={
+            <Image
+              src={domisiliUsaha.fotoUsaha}
+              alt={domisiliUsaha.namaUsaha}
+              width={72}
+              height={72}
+              className=' aspect-square rounded-full'
+            />
+          }
+        >
+          <Image
+            src={domisiliUsaha.fotoUsaha}
+            alt={domisiliUsaha.namaUsaha}
+            width={560}
+            height={560}
+          />
+        </DialogPhoto>
+
       </TableCell>
       <TableCell>
         {formatDate(domisiliUsaha.createdAt)}

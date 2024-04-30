@@ -151,7 +151,7 @@ const Letters = (
               <TableRow>
                 {tableHead.map((head) => {
                   return currentUser.role === "APPLICANT" ? (
-                    head === "User" || head === "Action" ? null :
+                    head === "User" || head === "Action" || head === "Delete" ? null :
                       <TableCell key={head}>{head}</TableCell>
                   ) : (
                     <TableCell key={head}>{head}</TableCell>

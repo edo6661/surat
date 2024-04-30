@@ -26,7 +26,7 @@ const LetterPage = async (
     <section className='base-container'>
       <div className="fl-ic">
         <Image
-          src={logoUrl}
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Lambang_Kota_Tangerang.png/640px-Lambang_Kota_Tangerang.png"
           alt='Logo'
           width={68}
           height={68}

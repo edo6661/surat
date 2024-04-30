@@ -22,7 +22,8 @@ export const formulirList = [
   "Suami Istri",
   "Belum Menikah",
   "Approved",
-  "Action",
+  "Reason",
+  "Delete",
 ];
 
 export const tableHeadDomisiliUsaha = [
@@ -32,11 +33,12 @@ export const tableHeadDomisiliUsaha = [
   "Jenis",
   "Nama",
   "Nik",
-  "Foto KTP",
-  "Foto",
+  "KTP",
+  "Usaha",
   "Dibuat",
   "Approved",
-  "Action",
+  "Reason",
+  "Delete",
 ];
 
 export const tableHeadTinggalPenduduk = [
@@ -51,7 +53,8 @@ export const tableHeadTinggalPenduduk = [
   "Foto KK",
   "Dibuat",
   "Approved",
-  "Action",
+  "Reason",
+  "Delete",
 ];
 
 export const tableHeadKelahiran = [
@@ -75,7 +78,8 @@ export const tableHeadKelahiran = [
   "Foto KK",
   "Dibuat",
   "Approved",
-  "Action",
+  "Reason",
+  "Delete",
 ];
 
 export const tableHeadKematian = [
@@ -95,7 +99,8 @@ export const tableHeadKematian = [
   "Foto KK",
   "Dibuat",
   "Approved",
-  "Action",
+  "Reason",
+  "Delete",
 ];
 
 export const tableHeadTidakMampuSekolah = [
@@ -117,7 +122,8 @@ export const tableHeadTidakMampuSekolah = [
   "Foto Rumah",
   "Dibuat",
   "Approved",
-  "Action",
+  "Reason",
+  "Delete",
 ];
 
 export const tableHeadPengantarSKCK = [
@@ -133,7 +139,8 @@ export const tableHeadPengantarSKCK = [
   "Foto KTP",
   "Dibuat",
   "Approved",
-  "Action",
+  "Reason",
+  "Delete",
 ];
 
 export const tableHeadKeteranganUsaha = [
@@ -152,7 +159,8 @@ export const tableHeadKeteranganUsaha = [
   "Foto KTP",
   "Dibuat",
   "Approved",
-  "Action",
+  "Reason",
+  "Delete",
 ];
 
 export const tableHeadTidakMampu = [
@@ -172,7 +180,8 @@ export const tableHeadTidakMampu = [
   "Keperluan",
   "Dibuat",
   "Approved",
-  "Action",
+  "Reason",
+  "Delete",
 ];
 
 export const tableHeadKeteranganSuamiIstri = [
@@ -196,7 +205,8 @@ export const tableHeadKeteranganSuamiIstri = [
   "Foto Buku Nikah",
   "Dibuat",
   "Approved",
-  "Action",
+  "Reason",
+  "Delete",
 ];
 
 export const tableHeadKeteranganBelumMenikah = [
@@ -213,5 +223,6 @@ export const tableHeadKeteranganBelumMenikah = [
   "Foto Akta Kelahiran",
   "Dibuat",
   "Approved",
-  "Action",
+  "Reason",
+  "Delete",
 ];

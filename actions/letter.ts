@@ -50,3 +50,19 @@ export const addSignatureToLetter = async (id: string, signature: string) => {
     console.error(err);
   }
 };
+
+export const updateReasonLetterWithId = async (id: string, reason: string) => {
+  try {
+    await db.letter.update({
+      where: {
+        id,
+      },
+      data: {
+        reason,
+      },
+    });
+    revalidatePath(`/letters/`);
+  } catch (err) {
+    console.error(err);
+  }
+};

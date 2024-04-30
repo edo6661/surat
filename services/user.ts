@@ -13,3 +13,17 @@ export const getCurrentUser = async () => {
     console.log(err);
   }
 };
+export const getAllUsers = async () => {
+  try {
+    const currentUser = await getCurrentUser();
+    return await db.user.findMany({
+      where: {
+        NOT: {
+          id: currentUser?.id,
+        },
+      },
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};

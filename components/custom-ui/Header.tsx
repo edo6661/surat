@@ -19,9 +19,12 @@ const Header = async () => {
                 {user?.role === "APPLICANT" && (
                   <Link href="/create-letter">Create Letter</Link>
                 )}
-                {/* {user?.role === "STAFF" && ( */}
                 <Link href="/letters">Letters</Link>
-                {/* )} */}
+                {
+                  user?.role === "SUBDISTRICT" && (
+                    <Link href="/users">Users</Link>
+                  )
+                }
                 <UserButton afterSignOutUrl="/" />
               </SignedIn>
               <SignedOut>

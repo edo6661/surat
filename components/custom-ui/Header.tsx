@@ -3,18 +3,43 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
 import { getCurrentUser } from "@/services/user";
+import Image from "next/image";
+import { Heading } from "./heading";
+import { usePathname, useRouter } from "next/navigation";
+import HeaderItems from "../HeaderItems";
+import AdminOption from "../AdminOption";
 
 const Header = async () => {
   const user = await getCurrentUser();
 
   return (
     <>
-      <header>
+      <header className=" bg-primaryBg py-4 text-white">
         <nav className="container">
           <div className="flex items-center justify-between">
-            <Link href="/">Home</Link>
-            <Link href="/pdfmake">pdfmake</Link>
+            <div className="max-w-[320px]">
+              <Link href="/" className=" fl-ic gap-4">
+                <Image
+                  src="/logo.png"
+                  alt="Logo"
+                  width={60}
+                  height={60}
+                />
+                <Heading className="text-lg leading-5">
+                  Kecamatan Jatiuwung Kota Tangerang
+                </Heading>
+              </Link>
+            </div>
+            <HeaderItems />
             <div className="fl-ic gap-4">
+              <AdminOption
+                role={user?.role!}
+              />
+              <UserButton afterSignOutUrl="/" />
+            </div>
+
+
+            {/* <div className="fl-ic gap-4">
               <SignedIn>
                 {user?.role === "APPLICANT" && (
                   <Link href="/create-letter">Create Letter</Link>
@@ -32,7 +57,7 @@ const Header = async () => {
                   <Link href="/sign-in">Sign in</Link>
                 </Button>
               </SignedOut>
-            </div>
+            </div> */}
           </div>
         </nav>
       </header>

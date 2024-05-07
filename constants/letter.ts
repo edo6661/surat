@@ -21,9 +21,6 @@ export const formulirList = [
   "Tidak Mampu (Umum)",
   "Suami Istri",
   "Belum Menikah",
-  "Approved",
-  "Reason",
-  "Delete",
 ];
 
 export const tableHeadDomisiliUsaha = [

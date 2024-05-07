@@ -41,7 +41,8 @@ const FormCreateLetter = () => {
             <CardDescription>Creating Letter</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <SelectCategory handleSelect={handleSelect} />
+            <SelectCategory handleSelect={handleSelect}
+            />
             <AnimatePresence>
               {selectedItem === "Domisili Usaha" && (
                 <motion.div

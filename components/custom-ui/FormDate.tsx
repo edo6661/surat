@@ -56,7 +56,6 @@ const FormDate = ({ control, label, name, description }: FormDateProps) => {
                 mode="single"
                 selected={field.value}
                 onSelect={field.onChange}
-                disabled={(date) => date < new Date()}
                 initialFocus
               />
             </PopoverContent>

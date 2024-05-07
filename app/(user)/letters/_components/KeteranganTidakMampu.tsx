@@ -1,12 +1,16 @@
-import { deleteLetterWithId } from '@/actions/letter';
+import { deleteLetterWithId, updateReasonLetterWithId } from '@/actions/letter';
 import AlertDialog from '@/components/custom-ui/AlertDialog';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { formatDate } from '@/utils/formateDate';
 import { TidakMampu, Letter, User } from '@prisma/client';
 import Image from 'next/image';
-import React, { useTransition } from 'react';
+import React, { useState, useTransition } from 'react';
 import { toast } from 'sonner';
 import ToggleApproveItem from './ToggleApproveItem';
+import DialogReason from './DialogReason';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { useRouter } from 'next/navigation';
 
 interface TidakMampuProps extends Letter {
   tidakMampu: TidakMampu;
@@ -14,7 +18,7 @@ interface TidakMampuProps extends Letter {
   currentUser: User;
 }
 
-const KeteranganTidakMampu = ({ tidakMampu, user, currentUser, id, approved }: TidakMampuProps) => {
+const KeteranganTidakMampu = ({ tidakMampu, user, currentUser, id, approved, reason }: TidakMampuProps) => {
 
   const [isPending, startTransition] = useTransition();
   const handleDelete = async () => {
@@ -30,8 +34,29 @@ const KeteranganTidakMampu = ({ tidakMampu, user, currentUser, id, approved }: T
     });
   };
 
+  const router = useRouter()
+  const redirectToLetter = () => router.push(`/tidak-mampu-umum/${id}`)
+
+  const [alasan, setAlasan] = useState(reason ?? "");
+
+  const handleReason = async () => {
+    startTransition(() => {
+      updateReasonLetterWithId(id, alasan)
+        .then((data) => {
+          toast.success(`Reason has been Successfully Changed`);
+        })
+        .catch((err) => {
+          console.error(err);
+          toast.error(`Failed to add reason: ${err.message}`);
+        });
+    });
+  }
+
   return (
-    <TableRow>
+    <TableRow
+      onClick={redirectToLetter}
+      className='cursor-pointer'
+    >
       {currentUser.role === "APPLICANT" ? null :
         <TableCell>
           {user.username}
@@ -68,12 +93,41 @@ const KeteranganTidakMampu = ({ tidakMampu, user, currentUser, id, approved }: T
       <TableCell>{tidakMampu.keperluan}</TableCell>
       <TableCell>{formatDate(tidakMampu.createdAt)}</TableCell>
       {
+        currentUser.role === "APPLICANT" && (
+          <>
+            <TableCell>
+              <Button variant={approved ? "default" : "destructive"} size="sm" className=' select-none'>
+                {approved ? "Approved" : "Pending"}
+              </Button>
+            </TableCell>
+            <TableCell>
+              {reason ? reason : "No reason"}
+            </TableCell>
+          </>
+        )
+      }
+      {
         currentUser.role !== "APPLICANT" && (
           <>
             <ToggleApproveItem
               id={id}
               approved={approved}
             />
+            <TableCell
+              onClick={(e) => e.stopPropagation()}
+            >
+              <DialogReason
+                isPending={isPending}
+                trigger='Reason'
+                action={handleReason}
+              >
+                <Input
+                  value={alasan}
+                  onChange={(e) => setAlasan(e.target.value)}
+                  placeholder="Add Reason"
+                />
+              </DialogReason>
+            </TableCell>
             <TableCell>
               <AlertDialog
                 action={handleDelete}

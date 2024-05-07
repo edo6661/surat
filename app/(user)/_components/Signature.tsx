@@ -45,6 +45,7 @@ export default function Signatures(
     action={uploadSignature}
     isPending={isPending}
     trigger="Add Signature"
+    role={currentUser.role}
   >
     <div className="flex flex-col ">
       <div className="flex flex-col gap-2">

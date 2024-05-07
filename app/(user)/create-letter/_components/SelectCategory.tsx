@@ -9,13 +9,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { FormulirType, formulirList } from "@/constants/letter";
-import { useState } from "react";
+import { Role } from "@prisma/client";
 
 interface SelectCategoryProps {
   handleSelect: (value: FormulirType) => void;
+  letterCount?: Record<string, number>;
+  role?: Role;
 }
 
-const SelectCategory = ({ handleSelect }: SelectCategoryProps) => {
+const SelectCategory = ({ handleSelect, letterCount, role }: SelectCategoryProps) => {
   return (
     <Select onValueChange={handleSelect}>
       <SelectTrigger>
@@ -25,9 +27,11 @@ const SelectCategory = ({ handleSelect }: SelectCategoryProps) => {
         <SelectGroup>
           <SelectLabel>Letter</SelectLabel>
           {formulirList.map((item) => (
-            <SelectItem key={item} value={item}>
-              {item}
-            </SelectItem>
+            <div key={item}>
+              <SelectItem key={item} value={item}>
+                {item} {letterCount && letterCount[item] ? `(${letterCount[item]})` : ""}
+              </SelectItem>
+            </div>
           ))}
         </SelectGroup>
       </SelectContent>

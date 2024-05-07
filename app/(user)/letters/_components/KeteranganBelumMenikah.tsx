@@ -7,6 +7,13 @@ import Image from 'next/image';
 import React, { useTransition } from 'react';
 import { toast } from 'sonner';
 import ToggleApproveItem from './ToggleApproveItem';
+import { Button } from '@/components/ui/button';
+
+import DialogReason from './DialogReason';
+import { Input } from '@/components/ui/input';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { updateReasonLetterWithId } from '@/actions/letter';
 
 interface KeteranganBelumMenikahProps extends Letter {
   keteranganBelumMenikah: KeteranganBelumMenikah;
@@ -15,7 +22,7 @@ interface KeteranganBelumMenikahProps extends Letter {
 }
 
 const BelumMenikah = ({ keteranganBelumMenikah, user,
-  currentUser, id, approved
+  currentUser, id, approved, reason
 }: KeteranganBelumMenikahProps) => {
 
   const [isPending, startTransition] = useTransition();
@@ -32,8 +39,29 @@ const BelumMenikah = ({ keteranganBelumMenikah, user,
     });
   };
 
+  const router = useRouter()
+  const redirectToLetter = () => router.push(`/belum-menikah/${id}`)
+
+  const [alasan, setAlasan] = useState(reason ?? "");
+
+  const handleReason = async () => {
+    startTransition(() => {
+      updateReasonLetterWithId(id, alasan)
+        .then((data) => {
+          toast.success(`Reason has been Successfully Changed`);
+        })
+        .catch((err) => {
+          console.error(err);
+          toast.error(`Failed to add reason: ${err.message}`);
+        });
+    });
+  }
+
   return (
-    <TableRow>
+    <TableRow
+      onClick={redirectToLetter}
+      className='cursor-pointer'
+    >
       {currentUser.role === "APPLICANT" ? null :
         <TableCell>
           {user.username}
@@ -75,12 +103,41 @@ const BelumMenikah = ({ keteranganBelumMenikah, user,
       </TableCell>
       <TableCell>{formatDate(keteranganBelumMenikah.createdAt)}</TableCell>
       {
+        currentUser.role === "APPLICANT" && (
+          <>
+            <TableCell>
+              <Button variant={approved ? "default" : "destructive"} size="sm" className=' select-none'>
+                {approved ? "Approved" : "Pending"}
+              </Button>
+            </TableCell>
+            <TableCell>
+              {reason ? reason : "No reason"}
+            </TableCell>
+          </>
+        )
+      }
+      {
         currentUser.role !== "APPLICANT" && (
           <>
             <ToggleApproveItem
               id={id}
               approved={approved}
             />
+            <TableCell
+              onClick={(e) => e.stopPropagation()}
+            >
+              <DialogReason
+                isPending={isPending}
+                trigger='Reason'
+                action={handleReason}
+              >
+                <Input
+                  value={alasan}
+                  onChange={(e) => setAlasan(e.target.value)}
+                  placeholder="Add Reason"
+                />
+              </DialogReason>
+            </TableCell>
             <TableCell>
               <AlertDialog
                 action={handleDelete}

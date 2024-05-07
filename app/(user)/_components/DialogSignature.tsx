@@ -10,6 +10,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button";
+import { Role } from "@prisma/client";
 
 import React from 'react'
 interface AlertDialogProps {
@@ -17,14 +18,17 @@ interface AlertDialogProps {
   isPending: boolean;
   trigger: string;
   children?: React.ReactNode;
+  role?: Role;
 }
 const DialogSignature = (
-  { action, isPending, trigger, children }: AlertDialogProps
+  { action, isPending, trigger, children, role }: AlertDialogProps
 ) => {
   return (
     <Alert>
       <AlertDialogTrigger asChild>
-        <Button className=" my-4">{trigger}</Button>
+        {
+          role !== "APPLICANT" && <Button className=" my-4">{trigger}</Button>
+        }
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

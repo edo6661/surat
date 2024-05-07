@@ -12,14 +12,14 @@ import { getCurrentUser } from '@/services/user';
 
 interface LetterPageProps {
   params: {
-    letterId: string
+    domisiliUsahaId: string
   }
 }
 const LetterPage = async (
-  { params: { letterId } }: LetterPageProps
+  { params: { domisiliUsahaId } }: LetterPageProps
 ) => {
   // TODO: Fetch letter data
-  const letter = await getLetterById(letterId)
+  const letter = await getLetterById(domisiliUsahaId)
   const currentUser = await getCurrentUser()
 
   return (
@@ -92,10 +92,11 @@ const LetterPage = async (
                 }
 
 
-                <p>(  ___________________________ )</p>
+                <p>  ___________________________ </p>
               </div>
               <SpesificLetter
                 letter={letter}
+                role={currentUser!.role}
               />
             </div>
           )}

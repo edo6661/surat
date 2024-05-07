@@ -73,6 +73,9 @@
   body {
     @apply bg-background text-foreground;
   }
+  html {
+    @apply antialiased scroll-smooth;
+  }
 }
 
 @layer utilities {

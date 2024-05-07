@@ -7,14 +7,16 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 import { fetchImageBlob } from '@/utils/fetchImageBlob';
 import { formatDate } from '@/utils/formateDate';
 import { logoUrl } from '@/constants';
+import { toast } from 'sonner';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const SpesificLetter = (
-  { letter }: any
+  { letter, role }: any
 ) => {
 
   const generatePdf = async () => {
     if (!letter || !letter.domisiliUsaha) return;
+    if (!letter.signature && role === "APPLICANT") return toast.error('Please wait signature to be added by the subdistrict officer');
 
 
     const fotoKtpUrl = await fetchImageBlob(letter.domisiliUsaha.fotoKtp);

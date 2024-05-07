@@ -162,7 +162,6 @@ model TidakMampuSekolah {
 
   letters      Letter[]
 
-
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }

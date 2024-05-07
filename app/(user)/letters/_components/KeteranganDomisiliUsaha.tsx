@@ -49,7 +49,7 @@ const KeteranganDomisiliUsaha = (
 
   const router = useRouter();
 
-  const redirectToLetter = () => router.push(`/letter/${id}`)
+  const redirectToLetter = () => router.push(`/domisili-usaha/${id}`)
 
   return (
     <TableRow

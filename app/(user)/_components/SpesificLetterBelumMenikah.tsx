@@ -20,7 +20,7 @@ const SpesificLetterBelumMenikah = (
 
   const generatePdf = async () => {
     if (!letter || !letter.keteranganBelumMenikah) return;
-    if (!letter.signature && role === "APPLICANT") return toast.error('Please wait signature to be added by the subdistrict officer');
+    if (!letter.signature) return toast.error('Please wait signature to be added by the subdistrict officer');
 
 
     const logo = await fetchImageBlob(logoUrl);

@@ -27,7 +27,7 @@ const DialogSignature = (
     <Alert>
       <AlertDialogTrigger asChild>
         {
-          role !== "APPLICANT" && <Button className=" my-4">{trigger}</Button>
+          role === "SUBDISTRICT" && <Button className=" my-4">{trigger}</Button>
         }
       </AlertDialogTrigger>
       <AlertDialogContent>

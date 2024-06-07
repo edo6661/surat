@@ -85,4 +85,7 @@
   .fl-ic {
     @apply flex items-center;
   }
+  .hero-responsive {
+    @apply flex items-center lg:flex-row flex-col;
+  }
 }

@@ -12,7 +12,7 @@ const Hero = () => {
     >
       <div className="inset-0 bg-black opacity-50 absolute h-full " />
 
-      <article className="container z-10 text-white relative fl-ic gap-24  min-h-[80vh]">
+      <article className="container z-10 text-white relative lg:fl-ic hero-responsive lg:gap-24 gap-12  min-h-[80vh]">
         <Image
           src="/logo.png"
           alt="Logo"
@@ -20,13 +20,13 @@ const Hero = () => {
           height={420}
         />
         <div className=" ">
-          <Heading className=" text-7xl">
+          <Heading className="lg:text-7xl text-5xl">
             E-Surat
           </Heading>
-          <p className="text-4xl">
+          <p className="lg:text-4xl text-2xl">
             Kecamatan Jatiuwung Kota Tangerang
           </p>
-          <p className="text-2xl">
+          <p className="lg:text-2xl text-lg">
             Meningkatkan Pelayanan Masyarakat & Memanfaatkan Teknologi Informasi
           </p>
         </div>

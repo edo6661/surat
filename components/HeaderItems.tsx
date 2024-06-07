@@ -24,7 +24,7 @@ const HeaderItems = () => {
   ]
   const route = usePathname()
   return (
-    <div className=" fl-ic justify-between gap-6">
+    <div className=" lg:fl-ic hidden justify-between gap-6">
       {
         route === "/" && (
           <ul className="fl-ic gap-4 text-lg">

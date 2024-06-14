@@ -1,11 +1,9 @@
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import React from "react";
-import { Button } from "../ui/button";
 import { getCurrentUser } from "@/services/user";
 import Image from "next/image";
 import { Heading } from "./heading";
-import { usePathname, useRouter } from "next/navigation";
 import HeaderItems from "../HeaderItems";
 import AdminOption from "../AdminOption";
 

@@ -19,7 +19,6 @@ const AdminOption = (
 ) => {
   return (
     <DropdownMenu>
-
       <DropdownMenuTrigger className=" bg-secondaryBg px-4 py-2 rounded-2xl">
         Options
       </DropdownMenuTrigger>
@@ -45,7 +44,7 @@ const AdminOption = (
 
         <DropdownMenuItem>
           <SignedIn>
-            {role === "SUBDISTRICT" && (
+            {role === "STAFF" && (
               <Link href="/users">Users</Link>
             )}
           </SignedIn>

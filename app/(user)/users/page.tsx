@@ -7,7 +7,7 @@ import FormUsers from './_components/FormUsers'
 const UsersPage = async () => {
   const currentUser = await getCurrentUser()
   const allUsers = await getAllUsers()
-  if (currentUser?.role !== 'SUBDISTRICT') return notFound()
+  if (currentUser?.role !== 'STAFF') return notFound()
   return (
     <section className='base-container'>
       <Heading>
